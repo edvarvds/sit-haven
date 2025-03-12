@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>{% block title %}Rossi Airsoft{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet"/>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-primary shadow-md">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex items-center justify-center relative">
+                <button onclick="toggleSideMenu()" class="text-white focus:outline-none md:hidden absolute left-0">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="{{ url_for('index') }}">
+                    <img alt="Rossi Logo" class="h-8" src="https://www.gsuplementos.com.br/_nuxt/img/logo.b3d268e.svg"/>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-16 border-t">
+        <!-- Selos e Avaliações -->
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-items-center">
+                <div class="w-full max-w-[200px]">
+                    <img class="w-full max-w-[100px]" src="https://www.gsuplementos.com.br/tema/growth/img/home/selos-final/02.jpg" alt="Site Blindado" class="w-full">
+                </div>
+                <div class="w-full max-w-[100px]">
+                    <img src="https://newimgebit-a.akamaihd.net/ebitBR/selo/img_33128.png" alt="Google Safe Browsing" class="w-full">
+                </div>
+                <div class="w-full max-w-[200px]">
+                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                        <div class="flex items-center justify-center mb-2">
+                            <span class="text-4xl font-bold text-primary">4.8</span>
+                            <span class="text-sm text-gray-500 ml-1">/5</span>
+                        </div>
+                        <div class="flex text-yellow-400 justify-center mb-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-sm text-gray-600">Nota média da loja</p>
+                    </div>
+                </div>
+                <div class="w-full max-w-[200px]">
+                    <img class="w-full max-w-[100px]" src="https://www.gsuplementos.com.br/tema/growth/img/home/selos-final/04.jpg" alt="Selo Compra Segura" class="w-full">
+                </div>
+            </div>
+        </div>
+
+        <!-- Formas de Pagamento -->
+        <div class="bg-gray-50 py-8">
+            <div class="container mx-auto px-4">
+                <h3 class="text-lg font-semibold text-gray-800 mb-6">Formas de Pagamento</h3>
+                <div class="grid grid-cols-7 sm:grid-cols-7 px-12  md:grid-cols-7 lg:grid-cols-8 gap-4">
+                    <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/01.abefb7d.svg" alt="Visa" class="h-8">
+                    <img  class="max-w-[35px]"  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNy43MzgiIGhlaWdodD0iMTcuMjIyIiB2aWV3Qm94PSIwIDAgMjcuNzM4IDE3LjIyMiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2LjEzMSAtMTEuMzg5KSI+PGNpcmNsZSBjeD0iOC41OTkiIGN5PSI4LjU5OSIgcj0iOC41OTkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI2LjY3MSAxMS40MTMpIiBmaWxsPSIjZjc5ZTFiIj48L2NpcmNsZT48Y2lyY2xlIGN4PSI4LjU5OSIgY3k9IjguNTk5IiByPSI4LjU5OSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTYuMTMxIDExLjM4OSkiIGZpbGw9IiNlYjAwMWIiPjwvY2lyY2xlPjxwYXRoIGQ9Ik0yNi42NzEsMTkuOTkzYTguNTg2LDguNTg2LDAsMCwwLDMuMzEzLDYuOCw4LjYsOC42LDAsMCwwLC4wMzMtMTMuNTkxQTguNTc1LDguNTc1LDAsMCwwLDI2LjY3MSwxOS45OTNaIiBmaWxsPSIjZmY1ZjAwIj48L3BhdGg+PC9nPjwvc3ZnPgo=" alt="Mastercard" class="h-8">
+                    <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/03.f3c5809.svg" alt="Elo" class="h-8">
+                    <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/04.88ddfe2.svg" alt="American Express" class="h-8">
+                    <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/05.e0cc06e.svg" alt="PIX" class="h-8">
+                    <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/06.4d61f68.svg" alt="Boleto" class="h-8">
+                    <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/07.8d5f548.svg" alt="PayPal" class="h-8">
+                    <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/07.8d5f548.svg" alt="PayPal" class="h-8">
+                     <img  class="max-w-[35px]"   src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMi4zMyIgaGVpZ2h0PSIyMC4xMDkiIHZpZXdCb3g9IjAgMCAzMi4zMyAyMC4xMDkiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMy44MzUgLTkuOTQ1KSI+PHJlY3Qgd2lkdGg9IjEuOTc2IiBoZWlnaHQ9IjIwLjEwOSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMuODM1IDkuOTQ1KSI+PC9yZWN0PjxyZWN0IHdpZHRoPSIxLjk3NiIgaGVpZ2h0PSIyMC4xMDkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI1Ljk5MSA5Ljk0NSkiPjwvcmVjdD48cmVjdCB3aWR0aD0iMS45NzYiIGhlaWdodD0iMjAuMTA5IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNi4xIDkuOTQ1KSI+PC9yZWN0PjxyZWN0IHdpZHRoPSIxLjk3NiIgaGVpZ2h0PSIyMC4xMDkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQwLjEyMSA5Ljk0NSkiPjwvcmVjdD48cmVjdCB3aWR0aD0iMS45NzYiIGhlaWdodD0iMjAuMTA5IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0NC4xODkgOS45NDUpIj48L3JlY3Q+PHJlY3Qgd2lkdGg9IjQuMDE5IiBoZWlnaHQ9IjIwLjEwOSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAuMDEyIDkuOTQ1KSI+PC9yZWN0PjxyZWN0IHdpZHRoPSI2LjA0MSIgaGVpZ2h0PSIyMC4xMDkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE3Ljg3OSA5Ljk0NSkiPjwvcmVjdD48L2c+PC9zdmc+Cg==" alt="PayPal" class="h-8">
+                     <img  class="max-w-[35px]" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDYwIDQwIj4KICA8cGF0aCBkPSJNNjAsMzVhNS4wMTUsNS4wMTUsMCwwLDEtNSw1SDVhNS4wMTUsNS4wMTUsMCwwLDEtNS01VjVBNS4wMTUsNS4wMTUsMCwwLDEsNSwwSDU1YTUuMDE1LDUuMDE1LDAsMCwxLDUsNVoiIGZpbGw9IiNmZmVkMDAiPjwvcGF0aD4KICA8cGF0aCBkPSJNMTkuNTI5LDIzLjY0NywzMCwzMC42MjVsMTAuNDc0LTYuOTc5LTQuNC0yLjkzNi01LDMuMzMsMi40MzksMS42M0wzMCwyOC4wMTdsLTYuNTU0LTQuMzcyLDEwLjk0My03LjMtMS45NTctMS4zMDZaIiBmaWxsPSIjMjI1MTk4Ij48L3BhdGg+CiAgPHBhdGggZD0iTTM2LjU1NywxMi4zLDM4LjUxNCwxMy42bDIuMTY5LTEuNDQ4VjkuNTQ5Wk0yNS42MDgsMjMuNjQ3bDEuOTU3LDEuMzA2TDQwLjQ3LDE2LjM0NSwzMCw5LjM3NSwxOS41MjksMTYuMzQ2bDQuMzg4LDIuOTMsNS0zLjMzNi0yLjQzOS0xLjYwOSwzLjUxNS0yLjM0OSw2LjU2MSw0LjM3MVptLTYuMjksNC4yVjMwLjQ1TDIzLjQ0MywyNy43LDIxLjQ4NiwyNi40WiIgZmlsbD0iIzIyNTE5OCI+PC9wYXRoPgo8L3N2Zz4K" alt="PayPal" class="h-8">
+                     <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/10.3fa8833.svg" alt="PayPal" class="h-8">
+                     <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/11.e034f67.svg" alt="PayPal" class="h-8">
+                     <img class="max-w-[35px]" src="https://www.gsuplementos.com.br/_nuxt/img/12.e906bcc.svg" alt="PayPal" class="h-8">
+                </div>
+            </div>
+        </div>
+
+        <!-- Links e Informações -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Sobre -->
+                <div>
+                    <h4 class="text-gray-800 font-semibold mb-4">Sobre a Growth Supplements</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/quem-somos" class="text-gray-600 hover:text-primary">Quem Somos</a></li>
+                        <li><a href="/fale-conosco" class="text-gray-600 hover:text-primary">Fale Conosco</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-primary">Blog</a></li>
+                        <li><a href="/seguranca-e-privacidade" class="text-gray-600 hover:text-primary">Segurança e Privacidade</a></li>
+                    </ul>
+                </div>
+
+                <!-- Ajuda -->
+                <div>
+                    <h4 class="text-gray-800 font-semibold mb-4">Ajuda</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/politica-de-troca" class="text-gray-600 hover:text-primary">Política de Troca e Devolução</a></li>
+                        <li><a href="/envio-da-encomenda" class="text-gray-600 hover:text-primary">Envio da encomenda</a></li>
+                        <li><a href="/politica-de-entrega" class="text-gray-600 hover:text-primary">Política de Entrega</a></li>
+                        <li><a href="/perguntas-frequentes" class="text-gray-600 hover:text-primary">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contato -->
+                <div>
+                    <h4 class="text-gray-800 font-semibold mb-4">Contato</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-phone-alt mr-2 text-primary"></i>
+                            <span>(11) 3003-3991</span>
+                        </li>
+                        <li class="text-sm text-gray-500">Seg a Sex das 8h às 12h | das 13h30 às 18h</li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-envelope mr-2 text-primary"></i>
+                            <a href="mailto:sac@growthsupplements.com.br" class="hover:text-primary">
+                                growth@atendimento.com.br
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Redes Sociais -->
+                <div>
+                    <h4 class="text-gray-800 font-semibold mb-4">Redes Sociais</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-600 hover:text-primary text-xl">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-primary text-xl">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-primary text-xl">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-primary text-xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-primary text-xl">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-primary text-xl">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Informações Legais -->
+        <div class="bg-primary text-white py-4">
+            <div class="container mx-auto px-4 text-center text-sm">
+                <p class="mb-2">Growth Supplements Produtos Alimentícios LTDA - Todos os direitos reservados - CNPJ 10.832.644/0001-98</p>
+                <p>Av. Wilson Lemos, 2850, Galpão 18, 19, 22, 23, 24 e 27, Santa Lúcia - Tijucas - SC - CEP 88200-958</p>
+            </div>
+        </div>
+
+        <!-- Avisos Legais -->
+        <div class="bg-gray-50 py-4 text-xs text-gray-500">
+            <div class="container flex items-center gap-4 justify-center mx-auto px-4 text-center">
+                <img class="max-h-[21px]" src="https://www.gsuplementos.com.br/_nuxt/img/uappi.e30eeb1.svg" />
+                <img class="max-h-[21px]"  src="https://www.gsuplementos.com.br/tema/growth/img/rodape/icones/logo-deluca.svg"/>
+            </div>
+        </div>
+    </footer>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

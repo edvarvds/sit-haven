@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Política de Entrega - Growth Suplementos{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Política de Entrega</h1>
+    
+    <div class="bg-white rounded-lg shadow-sm p-6 space-y-8">
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Informações Gerais</h2>
+            <p class="text-gray-600 leading-relaxed">
+                A Growth Suplementos trabalha com os melhores serviços de entrega para garantir que seu pedido 
+                chegue com segurança e no prazo estabelecido. Realizamos entregas para todo o Brasil através 
+                dos Correios e transportadoras parceiras.
+            </p>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Modalidades de Entrega</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-6 border border-gray-200 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-truck text-primary text-2xl mr-3"></i>
+                        <h3 class="font-semibold text-gray-800">PAC</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Prazo: 4 a 12 dias úteis</li>
+                        <li>• Mais econômico</li>
+                        <li>• Rastreamento disponível</li>
+                        <li>• Entrega em todo Brasil</li>
+                    </ul>
+                </div>
+                <div class="p-6 border border-gray-200 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-shipping-fast text-primary text-2xl mr-3"></i>
+                        <h3 class="font-semibold text-gray-800">SEDEX</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Prazo: 1 a 3 dias úteis</li>
+                        <li>• Entrega expressa</li>
+                        <li>• Rastreamento disponível</li>
+                        <li>• Principais capitais e regiões</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Prazos de Entrega</h2>
+            <div class="space-y-4">
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Processamento do Pedido</h3>
+                    <p class="text-gray-600">
+                        Após a confirmação do pagamento, seu pedido será processado em até 1 dia útil.
+                    </p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Prazo de Entrega</h3>
+                    <p class="text-gray-600">
+                        O prazo de entrega começa a contar a partir da data de postagem do produto e varia de 
+                        acordo com a modalidade de frete escolhida e sua localização.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Condições Especiais</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-4 bg-primary/10 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Frete Grátis</h3>
+                    <p class="text-gray-600">
+                        Pedidos acima de R$ 999,00 têm frete grátis para todo o Brasil na modalidade PAC.
+                    </p>
+                </div>
+                <div class="p-4 bg-primary/10 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Entrega Expressa</h3>
+                    <p class="text-gray-600">
+                        Para pedidos urgentes, oferecemos a opção de SEDEX com entrega em até 3 dias úteis.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Informações Importantes</h2>
+            <ul class="list-disc list-inside space-y-2 text-gray-600">
+                <li>O prazo de entrega pode variar de acordo com a região de entrega</li>
+                <li>Em caso de ausência no endereço, será realizada uma nova tentativa de entrega</li>
+                <li>Confira sempre se o endereço de entrega está correto</li>
+                <li>O rastreamento está disponível para todas as modalidades de entrega</li>
+            </ul>
+        </div>
+
+        <div class="p-4 bg-primary/10 rounded-lg">
+            <p class="text-gray-700 text-center">
+                Precisa de mais informações sobre entregas? 
+                <a href="{{ url_for('contact') }}" class="text-primary hover:underline">Fale Conosco</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

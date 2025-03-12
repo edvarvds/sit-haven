@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Suplements Product Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet"/>
+    
+    <script
+      src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+      data-utmify-prevent-subids
+      async
+      defer
+    ></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#1899d5',
+                        'primary-hover': '#158bc2',
+                        'green-primary': '#00cf00' // Added green color
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .main-product-image {
+            opacity: 1;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .product-gallery {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .main-image-container {
+            position: relative;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background-color: #f8f8f8;
+        }
+
+        .product-thumbnail {
+            transition: all 0.2s ease-in-out;
+            border: 2px solid transparent;
+            object-fit: contain;
+            background-color: #f8f8f8;
+            padding: 2px;
+        }
+
+        .product-thumbnail.active {
+            border-color: #1899d5;
+        }
+
+        .product-thumbnail:hover {
+            transform: scale(1.05);
+        }
+
+        #prevImage, #nextImage {
+            opacity: 0;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .main-image-container:hover #prevImage,
+        .main-image-container:hover #nextImage {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            #prevImage, #nextImage {
+                opacity: 0.8;
+            }
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .thumbnails-container {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            display: flex;
+            gap: 0.75rem;
+            padding: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .product-thumbnail {
+            flex: 0 0 auto;
+            width: 4.5rem;
+            height: 4.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            padding: 2px;
+        }
+
+        @media (min-width: 768px) {
+            .product-thumbnail {
+                width: 5rem;
+                height: 5rem;
+            }
+        }
+
+        .product-thumbnail.ring-2 {
+            padding: 2px;
+        }
+        /* Estilos para a seção de frete */
+        .fretefundo {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            background: linear-gradient(to right, #f8f9fa, #ffffff);
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin: 1rem 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .fretefundo:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .fretefundo img {
+            width: 40px;
+            height: auto;
+            padding: 4px;
+            margin-right: 0.75rem;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+        }
+
+        .ttl-frete {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #4a5568;
+            margin: 0;
+        }
+
+        .ttl-frete b {
+            color: #2ecc71;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .ip-frete {
+            display: block;
+            font-size: 0.85rem;
+            color: #718096;
+            margin-top: 0.15rem;
+        }
+
+        .ip-frete b {
+            color: #4a5568;
+            font-weight: 600;
+        }
+
+        @media (max-width: 640px) {
+            .fretefundo {
+                padding: 0.5rem;
+            }
+
+            .fretefundo img {
+                width: 35px;
+            }
+
+            .ttl-frete {
+                font-size: 0.85rem;
+            }
+
+            .ip-frete {
+                font-size: 0.8rem;
+            }
+        }
+        #fixed-buy-button {
+            transition: all 0.3s ease-in-out;
+            z-index: 999;
+        }
+
+        #nopadding {
+            padding: 0 !important;
+        }
+    </style>
+</head>
+<body id="nopadding" class="bg-gray-100">
+    <div id="loading-overlay" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden flex items-center justify-center">
+        <div class="bg-white p-8 rounded-xl shadow-2xl text-center max-w-md w-full mx-4">
+            <div class="flex justify-center mb-6">
+                <div class="relative">
+                    <div class="animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-primary text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Carregando Ambiente Seguro</h3>
+            <p class="text-gray-600 text-sm mb-4">Preparando um ambiente seguro para sua transação...</p>
+            <div class="flex items-center justify-center space-x-3">
+                <i class="fas fa-lock text-green-500"></i>
+                <span class="text-sm text-green-600">Conexão SSL Segura</span>
+            </div>
+        </div>
+    </div>
+    <div class="bg-primary text-white text-center py-2 text-xs" id="promo-banner"></div>
+
+    <script>
+        const today = new Date();
+        const day = today.getDate().toString().padStart(2, '0'); 
+        const month = (today.getMonth() + 1).toString().padStart(2, '0'); 
+        document.getElementById("promo-banner").innerText = `ÚLTIMO DIA DE QUEIMA DE ESTOQUE - ${day}/${month}`;
+    </script>
+
+    <header class="bg-primary shadow-md">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex items-center justify-center relative">
+                <button onclick="toggleSideMenu()" class="text-white focus:outline-none md:hidden absolute left-0">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <img alt="Rossi Logo" class="h-8" src="https://www.gsuplementos.com.br/_nuxt/img/logo.b3d268e.svg"/>
+                <div class="absolute right-0">
+                    <button onclick="toggleCart()" class="text-white focus:outline-none hover:text-gray-200 transition relative">
+                        <i class="fas fa-shopping-cart text-lg"></i>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center" id="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Side Menu -->
+    <div id="side-menu" class="fixed inset-y-0 left-0 w-64 bg-gray-800 shadow-xl transform -translate-x-full transition-transform duration-300 ease-in-out z-50">
+        <div class="flex flex-col h-full">
+            <div class="p-4 border-b border-gray-700">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-semibold text-white">Menu</h3>
+                    <button onclick="toggleSideMenu()" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <nav class="flex-1 overflow-y-auto py-4">
+                <!-- Categories -->
+                <div class="px-4 mb-4">
+                    <button onclick="toggleSubmenu('categories')" 
+                            class="w-full flex items-center justify-between text-gray-300 hover:text-white transition p-2 rounded-lg hover:bg-gray-700">
+                        <div class="flex items-center">
+                            <i class="fas fa-th-large mr-2"></i>
+                            <span>Categorias</span>
+                        </div>
+                        <i class="fas fa-chevron-down transition-transform" id="categories-arrow"></i>
+                    </button>
+                    <div id="categories-submenu" class="hidden mt-2 ml-4 space-y-1">
+                        <a href="#" class="block text-gray-400 hover:text-white transition p-2 hover:bg-gray-700 rounded-lg">Suplementos</a>
+                        <a href="#" class="block text-gray-400 hover:text-white transition p-2 hover:bg-gray-700 rounded-lg">Vitaminas</a>
+                        <a href="#" class="block text-gray-400 hover:text-white transition p-2 hover:bg-gray-700 rounded-lg">Proteínas</a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div class="px-4 space-y-1">
+                    <a href="#" class="flex items-center text-gray-300 hover:text-white transition p-2 rounded-lg hover:bg-gray-700">
+                        <i class="fas fa-dumbbell mr-2"></i>
+                        <span>Whey Protein</span>
+                    </a>
+
+                    <a href="#" class="flex items-center text-gray-300 hover:text-white transition p-2 rounded-lg hover:bg-gray-700">
+                        <i class="fas fa-flask mr-2"></i>
+                        <span>Creatina</span>
+                    </a>
+
+                    <a href="#" class="flex items-center text-gray-300 hover:text-white transition p-2 rounded-lg hover:bg-gray-700">
+                        <i class="fas fa-bolt mr-2"></i>
+                        <span>Pré-treino</span>
+                    </a>
+                </div>
+
+                <div class="my-4 border-t border-gray-700"></div>
+
+                <!-- Informational Pages -->
+                <div class="px-4 space-y-1">
+                    <a href="{{ url_for('about') }}" class="flex items-center text-gray-300 hover:text-white transition p-2 rounded-lg hover:bg-gray-700">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        <span>Quem Somos</span>
+                    </a>
+
+                    <a href="{{ url_for('contact') }}" class="flex items-center text-gray-300 hover:text-white transition p-2 rounded-lg hover:bg-gray-700">
+                        <i class="fas fa-headset mr-2"></i>
+                        <span>Fale Conosco</span>
+                    </a>
+
+                    <a href="{{ url_for('privacy') }}" class="flex items-center text-gray-300 hover:text-white transition p-2 rounded-lg hover:bg-gray-700">
+                        <i class="fas fa-shield-alt mr-2"></i>
+                        <span>Segurança e Privacidade</span>
+                    </a>
+
+                    <a href="{{ url_for('exchange') }}" class="flex items-center text-gray-300 hover:text-white transition p-2 rounded-lg hover:bg-gray-700">
+                        <i class="fas fa-exchange-alt mr-2"></i>
+                        <span>Política de Troca</span>
+                    </a>
+
+                    <a href="{{ url_for('order_shipping') }}" class="flex items-center text-gray-300 hover:text-white transition p-2 rounded-lg hover:bg-gray-700">
+                        <i class="fas fa-shipping-fast mr-2"></i>
+                        <span>Envio da Encomenda</span>
+                    </a>
+
+                    <a href="{{ url_for('delivery') }}" class="flex items-center text-gray-300 hover:text-white transition p-2 rounded-lg hover:bg-gray-700">
+                        <i class="fas fa-truck mr-2"></i>
+                        <span>Política de Entrega</span>
+                    </a>
+
+                    <a href="{{ url_for('faq') }}" class="flex items-center text-gray-300 hover:text-white transition p-2 rounded-lg hover:bg-gray-700">
+                        <i class="fas fa-question-circle mr-2"></i>
+                        <span>Perguntas Frequentes</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <script>
+        function toggleSubmenu(id) {
+            const submenu = document.getElementById(id + '-submenu');
+            const arrow = document.getElementById(id + '-arrow');
+            
+            if (submenu.classList.contains('hidden')) {
+                submenu.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                submenu.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-80 bg-white shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out z-50">
+        <div class="flex flex-col h-full">
+            <div class="p-4 border-b">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-semibold">Carrinho</h3>
+                    <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-4">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+
+            <div class="border-t p-4 bg-gray-50">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-600">Total:</span>
+                    <span class="text-xl font-bold text-primary" id="cart-total">R$ 0,00</span>
+                </div>
+                <button onclick="startCheckout()" class="w-full btn-primary py-3 px-4 rounded-lg text-sm font-medium hover:bg-opacity-90 transition disabled:opacity-50" id="checkout-button" disabled>
+                    Finalizar Compra
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bg-gray-50 py-2 px-4 text-gray-600 text-sm">
+        <div class="container mx-auto">
+            <a class="hover:text-primary" href="#">Início</a>
+            <span> > </span>
+            <a class="hover:text-primary" href="#">Promoção</a>
+            <span> > </span>
+            <span>(ÚLTIMO DIA DE PROMOÇÃO) - Kit 2 Whey 1kg + 2 Creatinas 250g + Pré-Treino Haze 300g + Multivitamínico 120caps</span
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid md:grid-cols-2 gap-8">
+            <div>
+                <div class="product-gallery relative">
+                    <div class="main-image-container relative">
+                        <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-primary p-2 rounded-r-lg shadow-md z-10 transition-all md:p-3" id="prevImage">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <img alt="KIT VISAO PRINCIPAL" class="w-full rounded-lg shadow-md main-product-image object-contain aspect-square" src="https://i.ibb.co/99Y6yGHP/imagem-kit-1.webp"/>
+                        <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-primary p-2 rounded-l-lg shadow-md z-10 transition-all md:p-3" id="nextImage">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2" id="imageIndicators">
+                            <!-- Indicadores serão adicionados via JavaScript -->
+                        </div>
+                    </div>
+                    <div class="flex justify-start space-x-3 overflow-x-auto pb-2 px-1 thumbnails-container hide-scrollbar">
+                        <img alt="Vista Principal" class="product-thumbnail ring-2 ring-primary p-0.5 active" data-index="0" src="https://i.ibb.co/99Y6yGHP/imagem-kit-1.webp"/>
+                        <img alt="Vista Principal" class="product-thumbnail" data-index="1" src="https://i.ibb.co/57Zv8kD/imagem-kit-2.webp"/>
+                        <img alt="Vista Lateral" class="product-thumbnail" data-index="2" src="https://i.ibb.co/5xxc1z9Z/imagem-kit-3.webp"/>
+                        <img alt="Vista Frontal" class="product-thumbnail" data-index="3" src="https://i.ibb.co/mVJS05Gw/imagem-kit-4.webp"/>
+                        <img alt="Vista Posterior" class="product-thumbnail" data-index="4" src="https://i.ibb.co/4Z4vr3pb/imagem-kit-5.webp"/>
+                    </div>
+                </div>
+                <div class="space-y-4 mt-6">
+                    <div>
+                        <h1 class="text-gray-800 text-2xl font-semibold mb-3">(ÚLTIMO DIA DE PROMOÇÃO) - Kit 2 Whey 1kg + 2 Creatinas 250g + Pré-Treino Haze 300g + Multivitamínico 120caps</h1>
+                        <a href="#reviews" class="flex items-center hover:opacity-90 transition-opacity mb-4">
+                            <div class="flex text-yellow-500">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(3.867 avaliações)</span>
+                        </a>
+                    </div>
+
+                    <div class="space-y-2">
+                        <p class="text-gray-600 text-2xl line-through">R$ 179,90</p>
+                        <div class="flex items-center gap-3">
+                            <p class="text-primary text-3xl font-bold">R$ 127,90</p>
+                            <div class="bg-gradient-to-r from-red-50 to-red-100 text-red-600 px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 border border-red-200 shadow-sm hover:shadow transition-all">
+                                <div class="flex items-center">
+                                    <span class="text-lg font-semibold">28</span>
+                                    <i class="fas fa-percent text-xs ml-0.5"></i>
+                                </div>
+                                <i class="fas fa-arrow-down text-xs animate-bounce"></i>
+                                <span class="font-medium">OFF</span>
+                            </div>
+                        </div>
+
+                        <!-- Flavor Selection -->
+                        <div class="mt-6 space-y-3">
+                            <label for="flavor" class="block text-gray-700 font-medium">
+                                Selecione o Sabor do Whey
+                                <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <select id="flavor" 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white appearance-none cursor-pointer"
+                                        required>
+                                    <option value="" disabled selected>Escolha um sabor</option>
+                                    <option value="chocolate">Chocolate</option>
+                                    <option value="morango">Morango</option>
+                                    <option value="baunilha">Baunilha</option>
+                                    <option value="natural">Natural</option>
+                                    <option value="banana">Banana</option>
+                                    <option value="cappuccino">Cappuccino</option>
+                                    <option value="doce-de-leite">Doce de leite</option>
+                                    <option value="chocolate-amendoim">Chocolate com amendoim</option>
+                                    <option value="cookies-cream">Cookies and Cream</option>
+                                    <option value="sorvete-creme">Sorvete de Creme</option>
+                                    <option value="caramelo">Caramelo</option>
+                                    <option value="mousse-maracuja">Mousse de Maracujá</option>
+                                    <option value="torta-limao">Torta de Limão</option>
+                                    <option value="chocolate-milkshake">Chocolate Milk Shake</option>
+                                    <option value="chocolate-branco">Chocolate Branco</option>
+                                    <option value="beijinho">Beijinho</option>
+                                    <option value="brigadeiro">Brigadeiro</option>
+                                    <option value="leite-po">Leite em Pó</option>
+                                    <option value="chocolate-morango">Chocolate com Morango</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-gray-500">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <button id="nutrition-info-btn" 
+                                        onclick="showNutritionInfo(event)" 
+                                        class="absolute right-8 top-1/2 transform -translate-y-1/2 text-primary hover:text-primary-hover transition hidden"
+                                        title="Ver informação nutricional">
+                                    <i class="fas fa-info-circle text-xl"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Nutritional Info Popup -->
+                            <div id="nutrition-overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-[9999]">
+                                <div id="nutrition-popup" class="relative bg-white rounded-xl shadow-2xl p-6 max-w-md mx-auto my-8 w-11/12 md:w-full">
+                                    <div class="flex justify-between items-center mb-4 border-b pb-3">
+                                        <h3 class="text-xl font-semibold text-gray-800" id="nutrition-flavor-title">Informação Nutricional</h3>
+                                        <button onclick="closeNutritionPopup()" class="text-gray-500 hover:text-gray-700 transition">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <div class="bg-gray-50 p-4 rounded-lg">
+                                            <p class="text-sm text-gray-600">Porção de 30g (2 medidas)</p>
+                                        </div>
+                                        <table class="w-full text-sm">
+                                            <tbody id="nutrition-table">
+                                                <!-- Nutritional info will be populated here -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+                                function showNutritionInfo(event) {
+                                    event.preventDefault();
+                                    const overlay = document.getElementById('nutrition-overlay');
+                                    overlay.classList.remove('hidden');
+                                    overlay.classList.add('flex');
+                                    
+                                    // Prevent body scroll when popup is open
+                                    document.body.style.overflow = 'hidden';
+
+                                    // Populate nutrition info based on selected flavor
+                                    const selectedFlavor = document.getElementById('flavor').value;
+                                    document.getElementById('nutrition-flavor-title').textContent = 
+                                        `Informação Nutricional - ${document.getElementById('flavor').options[document.getElementById('flavor').selectedIndex].text}`;
+                                }
+
+                                function closeNutritionPopup() {
+                                    const overlay = document.getElementById('nutrition-overlay');
+                                    overlay.classList.add('hidden');
+                                    overlay.classList.remove('flex');
+                                    
+                                    // Restore body scroll
+                                    document.body.style.overflow = 'auto';
+                                }
+
+                                // Close popup when clicking outside
+                                document.getElementById('nutrition-overlay').addEventListener('click', function(event) {
+                                    if (event.target === this) {
+                                        closeNutritionPopup();
+                                    }
+                                });
+
+                                // Show nutrition info button when flavor is selected
+                                document.getElementById('flavor').addEventListener('change', function() {
+                                    const nutritionInfoBtn = document.getElementById('nutrition-info-btn');
+                                    nutritionInfoBtn.classList.toggle('hidden', !this.value);
+                                });
+                            </script>
+
+                            <p class="text-sm text-gray-500">Escolha o sabor do seu Whey Protein</p>
+                        </div>
+
+                        <div class="flex items-center text-green-600 mt-2">
+                            <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                                <i class="fas fa-box text-green-600"></i>
+                            </div>
+                            <p class="font-medium">9 Unidades em estoque</p>
+                        </div>
+
+                        <!-- Freight Notification -->
+                        <div class="fretefundo">
+                            <img src="//balaoofertas.com/cdn/shop/t/21/assets/correios.png?v=73973234352233545991708550031" 
+                                 width="90" height="35" alt="logo dos correios">
+                            <div>
+                                <p class="ttl-frete">
+                                    <b>Frete Grátis</b> disponível
+                                    <span class="ip-frete" id="custom-address">para <b>São Paulo, SP</b></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botões de compra -->
+                    <button onclick="startCheckout()" 
+                            class="w-full buy-button py-3 px-6 rounded-lg text-sm font-medium hover:opacity-90 transition flex items-center justify-center mt-4 disabled:opacity-50 disabled:cursor-not-allowed" 
+                            id="buy-now-button" 
+                            disabled>
+                        <i class="fas fa-shopping-cart mr-2"></i>
+                        Comprar agora
+                    </button>
+                    <button onclick="addToCart('Kit Suplementos', 127.90, '')" 
+                            class="w-full btn-primary py-3 px-6 rounded-lg text-sm font-medium hover:bg-opacity-90 transition flex items-center justify-center add-to-cart-btn disabled:opacity-50 disabled:cursor-not-allowed" 
+                            id="add-to-cart-button"
+                            disabled>
+                        <i class="fas fa-cart-plus mr-2"></i>
+                        Adicionar ao carrinho
+                    </button>
+
+                    <script>
+                        // Função para verificar a seleção do sabor e atualizar os botões
+                        document.getElementById('flavor').addEventListener('change', function() {
+                            const buyNowButton = document.getElementById('buy-now-button');
+                            const addToCartButton = document.getElementById('add-to-cart-button');
+                                const fixedBuyButton = document.getElementById('thebutton');
+                            const selectedFlavor = this.value;
+                            const nutritionInfoBtn = document.getElementById('nutrition-info-btn');
+
+                            // Habilita ou desabilita os botões baseado na seleção
+                            buyNowButton.disabled = !selectedFlavor;
+                            addToCartButton.disabled = !selectedFlavor;
+                            fixedBuyButton.disabled = !selectedFlavor;
+                            // Mostra o botão de informação nutricional se um sabor for selecionado
+                            nutritionInfoBtn.classList.toggle('hidden', !selectedFlavor);
+
+                            // Atualiza a função de adicionar ao carrinho com o sabor selecionado
+                            if (selectedFlavor) {
+                                addToCartButton.onclick = function() {
+                                    addToCart('Kit Suplementos - Sabor: ' + 
+                                        document.getElementById('flavor').options[document.getElementById('flavor').selectedIndex].text, 
+                                        127.90, 
+                                        'https://i.ibb.co/99Y6yGHP/imagem-kit-1.webp'
+                                    );
+                                }
+                            }
+                        });
+
+                    </script>
+
+                    <!-- Delivery Estimation Section -->
+                    <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full">
+                                <i class="fas fa-truck text-primary text-xl"></i>
+                            </div>
+                            <h3 class="text-gray-800 font-medium ml-3">Calcular prazo de entrega</h3>
+                        </div>
+                        <div class="flex gap-2">
+                            <div class="flex-1">
+                                <input type="text" 
+                                       id="cep" 
+                                       placeholder="Digite seu CEP" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                                       maxlength="9">
+                                <p class="text-xs text-gray-500 mt-1">
+                                    <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" 
+                                       target="_blank" 
+                                       class="text-primary hover:underline">
+                                         Não sei meu CEP
+                                    </a>
+                                </p>
+                            </div>
+                            <button onclick="calculateDelivery()" 
+                                    id="calculate-delivery-btn"
+                                    class="btn-primary px-6 py-2 rounded-lg hover:bg-opacity-90 transition flex items-center justify-center min-w-[120px]">
+                                <span>Calcular</span>
+                                <i class="fas fa-spinner fa-spin ml-2 hidden"></i>
+                            </button>
+                        </div>
+                        <div id="delivery-result" class="mt-3 hidden">
+                            <div class="flex items-center text-green-600">
+                                <i class="fas fa-truck mr-2"></i>
+                                <p class="font-medium">Frete Grátis</p>
+                            </div>
+                            <p class="text-gray-600 text-sm mt-1">
+                                Prazo de entrega: <span id="delivery-address" class="font-medium"></span>
+                            </p>
+                            <p class="text-gray-600 text-sm">
+                                Entrega em 4 a 7 dias úteis
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Garantia Section -->
+                    <div class="mt-4 p-3 bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-100 shadow-sm">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 flex items-center justify-center bg-green-100 rounded-full mr-3">
+                                <i class="fas fa-shield-alt text-green-600 text-lg"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-800 font-medium text-sm">
+                                    <span class="text-green-600 font-semibold">Garantia de 30 dias</span>
+                                    após a entrega
+                                </p>
+                                <p class="text-gray-600 text-xs mt-0.5">
+                                    Devolução grátis em caso de defeito
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="mt-12 space-y-8">
+                        <!-- Descrição do Produto -->
+                        <section class="space-y-8">
+                            <h2 class="text-2xl font-semibold text-gray-800 flex items-center border-b pb-4">
+                                <i class="fas fa-info-circle text-primary mr-3"></i>
+                                Descrição do Kit
+                            </h2>
+
+                            <!-- Product Overview -->
+                            <div class="prose max-w-none text-gray-700">
+                                <p class="text-xl font-medium text-gray-800 mb-4">
+                                    Você está pronto para transformar seus treinos?
+                                </p>
+                                <p class="leading-relaxed mb-6">
+                                    Este combo foi pensado para quem busca maximizar os resultados, melhorar a performance e garantir uma recuperação eficiente. Cada item tem um papel fundamental na sua rotina de treinos, e juntos eles formam o kit definitivo para sua evolução física.
+                                </p>
+
+                                <h3 class="text-lg font-semibold text-gray-800 mt-8 mb-4">O que está incluído?</h3>
+
+                                <!-- Whey Protein Section -->
+                                <div class="bg-white rounded-lg p-6 shadow-sm mb-6">
+                                    <h4 class="text-lg font-semibold text-primary mb-3">1. Whey Protein (2 unidades de 1KG cada)</h4>
+
+                                    <div class="space-y-4">
+                                        <div>
+                                            <p class="font-medium text-gray-700">Descrição:</p>
+                                            <p class="text-gray-600">Fonte de proteína de alto valor biológico, ideal para ganho de massa muscular e recuperação.</p>
+                                        </div>
+
+                                        <div>
+                                            <p class="font-medium text-gray-700">Diferenciais:</p>
+                                            <ul class="list-disc pl-5 text-gray-600 space-y-1">
+                                                <li>Contém aminoácidos essenciais, incluindo BCAAs.</li>
+                                                <li>Fácil dissolução e sabores incríveis.</li>
+                                                <li>Baixo teor de carboidratos e gorduras.</li>
+                                            </ul>
+                                        </div>
+
+                                        <div>
+                                            <p class="font-medium text-gray-700">Uso recomendado:</p>
+                                            <p class="text-gray-600">Consuma após o treino ou como complemento proteico em qualquer momento do dia.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Creatina Section -->
+                                <div class="bg-white rounded-lg p-6 shadow-sm mb-6">
+                                    <h4 class="text-lg font-semibold text-primary mb-3">2. Creatina (2 unidades de 250g cada)</h4>
+
+                                    <div class="space-y-4">
+                                        <div>
+                                            <p class="font-medium text-gray-700">Descrição:</p>
+                                            <p class="text-gray-600">Potencializa força e explosão muscular, sendo essencial para treinos de alta intensidade.</p>
+                                        </div>
+
+                                        <div>
+                                            <p class="font-medium text-gray-700">Diferenciais:</p>
+                                            <ul class="list-disc pl-5 text-gray-600 space-y-1">
+                                                <li>100% pura, sem aditivos.</li>
+                                                <li>Melhora a performance e reduz a fadiga muscular.</li>
+                                            </ul>
+                                        </div>
+
+                                        <div>
+                                            <p class="font-medium text-gray-700">Uso recomendado:</p>
+                                            <p class="text-gray-600">Tomar diariamente, preferencialmente com suco ou shake pós-treino.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pré-Treino Section -->
+                                <div class="bg-white rounded-lg p-6 shadow-sm mb-6">
+                                    <h4 class="text-lg font-semibold text-primary mb-3">3. Pré-Treino Haze (1 unidade de 300g)</h4>
+
+                                    <div class="space-y-4">
+                                        <div>
+                                            <p class="font-medium text-gray-700">Descrição:</p>
+                                            <p class="text-gray-600">Energia e foco para treinos mais intensos e produtivos.</p>
+                                        </div>
+
+                                        <div>
+                                            <p class="font-medium text-gray-700">Diferenciais:</p>
+                                            <ul class="list-disc pl-5 text-gray-600 space-y-1">
+                                                <li>Contém cafeína e taurina para máxima disposição.</li>
+                                                <li>Melhora o fluxo sanguíneo e reduz a sensação de cansaço.</li>
+                                                <li>Sabores irresistíveis.</li>
+                                            </ul>
+                                        </div>
+
+                                        <div>
+                                            <p class="font-medium text-gray-700">Uso recomendado:</p>
+                                            <p class="text-gray-600">Misture uma dose com água e consuma 20 minutos antes do treino.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Multivitamínico Section -->
+                                <div class="bg-white rounded-lg p-6 shadow-sm mb-6">
+                                    <h4 class="text-lg font-semibold text-primary mb-3">4. Multivitamínico (1 unidade com 120 cápsulas)</h4>
+
+                                    <div class="space-y-4">
+                                        <div>
+                                            <p class="font-medium text-gray-700">Descrição:</p>
+                                            <p class="text-gray-600">Completo para suprir as necessidades diárias de vitaminas e minerais.</p>
+                                        </div>
+
+                                        <div>
+                                            <p class="font-medium text-gray-700">Diferenciais:</p>
+                                            <ul class="list-disc pl-5 text-gray-600 space-y-1">
+                                                <li>Melhora a imunidade e a disposição.</li>
+                                                <li>Promove saúde geral e equilíbrio corporal.</li>
+                                            </ul>
+                                        </div>
+
+                                        <div>
+                                            <p class="font-medium text-gray-700">Uso recomendado:</p>
+                                            <p class="text-gray-600">Tomar 2 cápsulas ao dia, preferencialmente junto com as refeições.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Price and Benefits -->
+                                <div class="bg-gradient-to-r from-primary/10 to-transparent p-6 rounded-lg mt-8">
+                                    <h3 class="text-xl font-semibold text-primary mb-4">Combo completo por apenas R$ 127,90</h3>
+
+                                    <div class="space-y-2">
+                                        <div class="flex items-center text-gray-700">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <p>Frete grátis para todo o Brasil.</p>
+                                        </div>
+                                        <div class="flex items-center text-gray-700">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <p>Se não gostar, devolvemos o seu dinheiro!</p>
+                                        </div>
+                                        <div class="flex items-center text-gray-700">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <p>Brinde exclusivo: Acesse nosso e-book com dicas de treino e nutrição!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Warranty Section -->
+                            <div class="bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 border border-gray-100 hover:shadow-lg transition-shadow duration-300 mt-8">
+                                <div class="flex flex-col md:flex-row items-center justify-between">
+                                    <div class="md:w-2/3 space-y-4">
+                                        <div class="flex items-center mb-4">
+                                            <div class="w-12 h-12 flex items-center justify-center bg-green-100 rounded-full">
+                                                <i class="fas fa-shield-alt text-green-600 text-xl"></i>
+                                            </div>
+                                            <h3 class="text-xl font-semibold text-gray-800 ml-4">Garantia Growth ™ </h3>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed">
+                                            Oferecemos <strong>30 dias de garantia</strong> para garantir a sua satisfação com nosso produto, nossa política de garantia inclui:
+                                        </p>
+                                        <ul class="space-y-3">
+                                            <li class="flex items-center text-gray-700">
+                                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                                <span>Troca imediata em caso de defeito ou insatisfação</span>
+                                            </li>
+                                            <li class="flex items-center text-gray-700">
+                                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                                <span>Frete grátis na devolução</span>
+                                            </li>
+                                        </ul>
+                                        <div class="mt-4 pt-4 border-t border-gray-200">
+                                            <p class="text-sm text-gray-600">
+                                                Para mais informações sobre nossa garantia, entre em contato com nosso suporte.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="md:w-1/3 flex justify-center mt-6 md:mt-0">
+                                        <img src="https://ederprado.com/wp-content/uploads/2021/10/Selo-de-Garantia-de-30-Dias-PNG-Transparente-Sem-Fundo.png"
+                                             alt="Selo de Garantia 30 Dias"
+                                             class="w-48 h-48 object-contain"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ Section -->
+                            <div class="mt-12 bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                                <div class="flex items-center mb-8">
+                                    <div class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-full">
+                                        <i class="fas fa-question-circle text-primary text-xl"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-semibold text-gray-800 ml-4">Perguntas Frequentes</h3>
+                                </div>
+
+                                <!-- FAQ Accordion -->
+                                <div class="space-y-4" id="faqAccordion">
+                                    <!-- Garantia dos Produtos -->
+                                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                        <button class="w-full flex items-center justify-between p-4 text-left bg-white hover:bg-gray-50 transition-colors duration-200 faq-button" onclick="toggleFAQ(this)">
+                                            <span class="text-gray-800 font-medium">Garantia dos Produtos</span>
+                                            <i class="fas fa-chevron-down text-primary transition-transform duration-200"></i>
+                                        </button>
+                                        <div class="faq-content hidden bg-gray-50 p-4 border-t border-gray-200">
+                                            <p class="text-gray-700">Sim! Todos os nossos produtos têm garantia contra defeitos de fabricação. Se houver qualquer problema, basta entrar em contato com nosso suporte para assistência.</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Prazo de Entrega -->
+                                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                        <button class="w-full flex items-center justify-between p-4 text-left bg-white hover:bg-gray-50 transition-colors duration-200 faq-button" onclick="toggleFAQ(this)">
+                                            <span class="text-gray-800 font-medium">Prazo de Entrega</span>
+                                            <i class="fas fa-chevron-down text-primary transition-transform duration-200"></i>
+                                        </button>
+                                        <div class="faq-content hidden bg-gray-50 p-4 border-t border-gray-200">
+                                            <p class="text-gray-700">O prazo de entrega varia conforme a sua localização e a modalidade de envio escolhida. O tempo estimado será informado durante o processo de compra.</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Trocas e Devoluções -->
+                                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                        <button class="w-full flex items-center justify-between p-4 text-left bg-white hover:bg-gray-50 transition-colors duration-200 faq-button" onclick="toggleFAQ(this)">
+                                            <span class="text-gray-800 font-medium">Trocas e Devoluções</span>
+                                            <i class="fas fa-chevron-down text-primary transition-transform duration-200"></i>
+                                        </button>
+                                        <div class="faq-content hidden bg-gray-50 p-4 border-t border-gray-200">
+                                            <p class="text-gray-700">Sim! Você tem até 30 dias após o recebimento do pedido para solicitar a troca ou devolução, de acordo com o Código de Defesa do Consumidor.</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Certificação e Aprovação -->
+                                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                        <button class="w-full flex items-center justify-between p-4 text-left bg-white hover:bg-gray-50 transition-colors duration-200 faq-button" onclick="toggleFAQ(this)">
+                                            <span class="text-gray-800 font-medium">Certificação e Aprovação dos Suplementos</span>
+                                            <i class="fas fa-chevron-down text-primary transition-transform duration-200"></i>
+                                        </button>
+                                        <div class="faq-content hidden bg-gray-50 p-4 border-t border-gray-200">
+                                            <p class="text-gray-700">Sim! Todos os nossos suplementos são registrados e seguem as normas exigidas pela ANVISA e pelo MAPA, garantindo total segurança e qualidade.</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Acompanhamento de Pedidos -->
+                                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                        <button class="w-full flex items-center justify-between p-4 text-left bg-white hover:bg-gray-50 transition-colors duration-200 faq-button" onclick="toggleFAQ(this)">
+                                            <span class="text-gray-800 font-medium">Acompanhamento de Pedidos</span>
+                                            <i class="fas fa-chevron-down text-primary transition-transform duration-200"></i>
+                                        </button>
+                                        <div class="faq-content hidden bg-gray-50 p-4 border-t border-gray-200">
+                                            <p class="text-gray-700">Assim que sua compra for confirmada, você receberá um código de rastreamento por e-mail, permitindo acompanhar a entrega em tempo real.</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Testes de Qualidade -->
+                                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                        <button class="w-full flex items-center justify-between p-4 text-left bg-white hover:bg-gray-50 transition-colors duration-200 faq-button" onclick="toggleFAQ(this)">
+                                            <span class="text-gray-800 font-medium">Testes de Qualidade dos Produtos</span>
+                                            <i class="fas fa-chevron-down text-primary transition-transform duration-200"></i>
+                                        </button>
+                                        <div class="faq-content hidden bg-gray-50 p-4 border-t border-gray-200">
+                                            <p class="text-gray-700">Sim! Todos os suplementos são submetidos a rigorosos testes de qualidade, garantindo pureza, segurança e eficácia.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function toggleFAQ(button) {
+                                        const content = button.nextElementSibling;
+                                        const icon = button.querySelector('.fa-chevron-down');
+
+                                        // Toggle the content visibility
+                                        content.classList.toggle('hidden');
+
+                                        // Rotate the icon
+                                        if (content.classList.contains('hidden')) {
+                                            icon.style.transform = 'rotate(0deg)';
+                                        } else {
+                                            icon.style.transform = 'rotate(180deg)';
+                                        }
+
+                                        // Close other open FAQs
+                                        const allContents = document.querySelectorAll('.faq-content');
+                                        const allIcons = document.querySelectorAll('.fa-chevron-down');
+
+                                        allContents.forEach((item, index) => {
+                                            if (item !== content) {
+                                                item.classList.add('hidden');
+                                                allIcons[index].style.transform = 'rotate(0deg)';
+                                            }
+                                        });
+                                    }
+                                </script>
+                            </div>
+                            <!-- End FAQ Section -->
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <!-- Reviews Section -->
+                <div id="reviews" class="mt-12 bg-white rounded-xl p-6 shadow-sm">
+                    <div class="text-center mb-8">
+                        <h2 class="text-2xl font-semibold text-gray-800">Avaliações dos Clientes</h2>
+                    </div>
+
+                    <!-- Rating Statistics -->
+                    <div class="max-w-2xl mx-auto mb-12">
+                        <!-- Average Rating -->
+                        <div class="flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="text-6xl font-bold text-yellow-500" id="average-rating">4.8</div>
+                                <div class="flex text-yellow-500 justify-center mt-2">
+                                    <i class="fas fa-star text-xl"></i>
+                                    <i class="fas fa-star text-xl"></i>
+                                    <i class="fas fa-star text-xl"></i>
+                                    <i class="fas fa-star text-xl"></i>
+                                    <i class="fas fa-star-half-alt text-xl"></i>
+                                </div>
+                                <div class="text-gray-500 mt-2 text-lg">
+                                    <span id="total-reviews">1.842</span> avaliações
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rating Bars -->
+                        <div class="mt-8 space-y-3 max-w-xl mx-auto">
+                            <div id="rating-bar-5" class="flex items-center">
+                                <div class="text-sm text-gray-600 w-12">5 ★</div>
+                                <div class="flex-1 h-4 bg-gray-100 rounded-full mx-2 overflow-hidden">
+                                    <div class="progress-bar h-full bg-yellow-500" style="width: 80%"></div>
+                                </div>
+                                <div class="text-sm text-yellow-500 w-12 text-right font-medium percentage">80%</div>
+                            </div>
+                            <div id="rating-bar-4" class="flex items-center">
+                                <div class="text-sm text-gray-600 w-12">4 ★</div>
+                                <div class="flex-1 h-4 bg-gray-100 rounded-full mx-2 overflow-hidden">
+                                    <div class="progress-bar h-full bg-yellow-500" style="width: 15%"></div>
+                                </div>
+                                <div class="text-sm text-yellow-500 w-12 text-right font-medium percentage">15%</div>
+                            </div>
+                            <div id="rating-bar-3" class="flex items-center">
+                                <div class="text-sm text-gray-600 w-12">3 ★</div>
+                                <div class="flex-1 h-4 bg-gray-100 rounded-full mx-2 overflow-hidden">
+                                    <div class="progress-bar h-full bg-yellow-500" style="width: 3%"></div>
+                                </div>
+                                <div class="text-sm text-yellow-500 w-12 text-right font-medium percentage">3%</div>
+                            </div>
+                            <div id="rating-bar-2" class="flex items-center">
+                                <div class="text-sm text-gray-600 w-12">2 ★</div>
+                                <div class="flex-1 h-4 bg-gray-100 rounded-full mx-2 overflow-hidden">
+                                    <div class="progress-bar h-full bg-yellow-500" style="width: 1%"></div>
+                                </div>
+                                <div class="text-sm text-yellow-500 w-12 text-right font-medium percentage">1%</div>
+                            </div>
+                            <div id="rating-bar-1" class="flex items-center">
+                                <div class="text-sm text-gray-600 w-12">1 ★</div>
+                                <div class="flex-1 h-4 bg-gray-100 rounded-full mx-2 overflow-hidden">
+                                    <div class="progress-bar h-full bg-yellow-500" style="width: 1%"></div>
+                                </div>
+                                <div class="text-sm text-yellow-500 w-12 text-right font-medium percentage">1%</div>
+                            </div>
+
+                            <!-- Write Review Button -->
+                            <div class="text-center mt-8">
+                                <button onclick="openReviewModal()" class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center mx-auto">
+                                    <i class="fas fa-edit mr-2"></i>
+                                    Escrever Avaliação
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reviews List -->
+                    <div class="reviews-list space-y-8 max-w-4xl mx-auto">
+                        <!-- Reviews will be dynamically added here -->
+                    </div>
+
+                    <!-- Load More Button -->
+                    <div class="text-center mt-12">
+                        <button id="load-more-reviews" class="bg-gradient-to-r from-primary to-primary/90 text-white px-8 py-3 rounded-lg hover:from-primary/90 hover:to-primary transition-all duration-300 shadow-lg hover:shadow-xl flex items-center mx-auto">
+                            <span>Ver Mais Avaliações</span>
+                            <i class="fas fa-chevron-down ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <script>
+        
+    </script>
+    <!-- Botão fixo de compra -->
+    <div id="fixed-buy-button" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-4 md:hidden z-50">
+        <button onclick="startCheckout()" id="thebutton" disabled class="w-full disabled:opacity-50 disabled:cursor-not-allowed buy-button text-white py-3 rounded-lg text-sm font-medium hover:bg-opacity-90 transition flex items-center justify-center">
+            <i class="fas fa-shopping-cart mr-2"></i>
+            Comprar agora
+        </button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+   
+    <!-- Adiciona script de controle do botão flutuante no final do body -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fixedButton = document.getElementById('fixed-buy-button');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        let lastScroll = 0;
+        let isCartOpen = false;
+
+        // Inicialmente esconde o botão
+        fixedButton.style.opacity= '0';
+        fixedButton.style.transform = 'translateY(100%)';
+
+        // Função para verificar se o carrinho está aberto
+        const checkCartState = () => {
+            return !cartSidebar.classList.contains('translate-x-full');
+        };
+
+        // Função para atualizar visibilidade do botão
+        const updateButtonVisibility = () => {
+    const currentScroll = window.scrollY;
+    const viewportHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollThreshold = viewportHeight * 1.5; // Uma tela e meia
+    const isEndOfPage = currentScroll + viewportHeight >= documentHeight - 10; 
+
+    isCartOpen = checkCartState();
+
+    if ((currentScroll > scrollThreshold && !isCartOpen)) {
+        fixedButton.style.opacity = '1';
+        fixedButton.style.transform = 'translateY(0)';
+    } else {
+        fixedButton.style.opacity = '0';
+        fixedButton.style.transform = 'translateY(100%)';
+    }
+
+            if(isEndOfPage) {
+                 fixedButton.style.opacity = '0';
+        fixedButton.style.transform = 'translateY(100%)';
+            }
+
+    lastScroll = currentScroll;
+};
+
+
+        // Event listeners
+        window.addEventListener('scroll', updateButtonVisibility);
+
+        // Observa mudanças no carrinho
+        const observer = new MutationObserver(() => {
+            updateButtonVisibility();
+        });
+
+        observer.observe(cartSidebar, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+    });
+</script>
+
+    <script>
+    // Adiciona após os scripts existentes
+    function openImageModal(imageSrc) {
+        const modal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        modalImage.src = imageSrc;
+        modal.classList.remove('hidden');
+        // Desabilita o scroll do body
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageModal() {
+        const modal = document.getElementById('image-modal');
+        modal.classList.add('hidden');
+        // Habilita o scroll do body
+        document.body.style.overflow = 'auto';
+    }
+
+    // Adiciona evento de clique em todas as imagens de avaliação
+    document.addEventListener('DOMContentLoaded', function() {
+        const reviewImages = document.querySelectorAll('.review-image');
+        reviewImages.forEach(img => {
+            img.addEventListener('click', function() {
+                openImageModal(this.src);
+            });
+        });
+    });
+
+    // Modifica as funções do carrinho
+    function showToast() {    const toast = document.getElementById('toast-notification');
+        toast.classList.remove('translate-x-full');
+        setTimeout(() => {
+            toast.classList.add('translate-x-full');
+        }, 3000);
+    }
+
+    function updateCartButtons(hasItems) {
+        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+        addToCartButtons.forEach(button => {
+            if (hasItems) {
+                button.disabled = true;
+                button.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                button.disabled = false;
+                button.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        });
+    }
+
+    function addToCart(name, price, image) {
+        const cartItems = document.getElementById('cart-items');
+
+        // Verifica se já existe um item no carrinho
+        if (cartItems.children.length > 0) {
+            showToast();
+            return;
+        }
+
+        const item = document.createElement('div');
+        item.className = 'flex items-center justify-between p-4 border-b';
+        item.innerHTML = `
+            <div class="flex items-center space-x-4">
+                <img src="${image}" alt="${name}" class="w-16 h-16 object-cover rounded-lg">
+                <div>
+                    <h4 class="font-medium text-gray-800">${name}</h4>
+                    <p class="text-primary font-bold">R$ ${price.toFixed(2)}</p>
+                </div>
+            </div>
+            <button onclick="removeFromCart(this.parentElement)" class="text-red-500 hover:text-red-700">
+                <i class="fas fa-trash"></i>
+            </button>
+        `;
+
+        cartItems.appendChild(item);
+        document.getElementById('cart-count').textContent = '1';
+        document.getElementById('cart-total').textContent = `R$ ${price.toFixed(2)}`;
+        document.getElementById('checkout-button').disabled = false;
+
+        // Atualiza os botões de adicionar ao carrinho
+        updateCartButtons(true);
+
+        // Abre o carrinho
+        toggleCart();
+    }
+
+    function removeFromCart(item) {
+        item.remove();
+        document.getElementById('cart-count').textContent = '0';
+        document.getElementById('cart-total').textContent = 'R$ 0,00';
+        document.getElementById('checkout-button').disabled = true;
+
+        // Atualiza os botões de adicionar ao carrinho
+        updateCartButtons(false);
+    }
+
+    // Adiciona classe aos botões de adicionar ao carrinho
+    document.addEventListener('DOMContentLoaded', function() {
+        const addToCartButtons = document.querySelectorAll('button:not(#checkout-button):contains("Adicionar ao carrinho")');
+        addToCartButtons.forEach(button => {
+            button.classList.add('add-to-cart-btn');
+        });
+    });
+</script>
+
+    <script>
+    // Adiciona após os scripts existentes
+    document.addEventListener('DOMContentLoaded', function() {
+        const mainImage = document.querySelector('.main-product-image');
+        const thumbnails = document.querySelectorAll('.product-thumbnail');
+        const thumbnailsContainer = document.querySelector('.thumbnails-container');
+        const prevButton = document.getElementById('prevImage');
+        const nextButton = document.getElementById('nextImage');
+        letcurrentIndex = 0;
+
+        // Função para centralizar a thumbnail no container
+        function centerThumbnail(thumbnail) {
+                        const containerWidth = thumbnailsContainer.offsetWidth;
+            const thumbnailWidth = thumbnail.offsetWidth;
+            const scrollLeft = thumbnail.offsetLeft - (containerWidth / 2) + (thumbnailWidth /2);
+            thumbnailsContainer.scrollTo({
+                left: scrollLeft,
+                behavior: 'smooth'
+            });
+        }
+
+        // Função para atualizar a imagem principal e a thumbnail ativa
+        function updateImage(index) {
+            mainImage.src = thumbnails[index].src;
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            thumbnails[index].classList.add('active');
+            currentIndex = index;
+            centerThumbnail(thumbnails[index]);
+        }
+
+        // Event listeners para as thumbnails
+        thumbnails.forEach((thumbnail, index) => {
+            thumbnail.addEventListener('click', () => {
+                updateImage(index);
+            });
+        });
+
+        // Event listeners para os botões de navegação
+        prevButton.addEventListener('click', () => {
+            const newIndex = currentIndex > 0 ? currentIndex - 1 : thumbnails.length - 1;
+            updateImage(newIndex);
+        });
+
+        nextButton.addEventListener('click', () => {
+            const newIndex = currentIndex < thumbnails.length - 1 ? currentIndex + 1 : 0;
+            updateImage(newIndex);
+        });
+
+        // Inicializar com a primeira imagem
+        updateImage(0);
+    });
+</script>
+    <!-- Modal para visualização de imagens -->
+<div id="image-modal" class="fixed inset-0 bg-black bg-opacity-90 hidden z-50 flex items-center justify-center p-4">
+    <div class="relative w-full max-w-4xl">
+        <button onclick="closeImageModal()" class="absolute -top-10 right-0 text-white hover:text-gray-300">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+        <img id="modal-image" src="" alt="Imagem ampliada" class="w-full h-auto rounded-lg">
+    </div>
+</div>
+
+<script>
+    // Função para rolar suavemente até a seção de sabor
+    function scrollToFlavorSection() {
+        const flavorSelect = document.getElementById('flavor');
+        if (!flavorSelect.value) {
+            flavorSelect.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            flavorSelect.focus();
+            return false;
+        }
+        return true;
+    }
+
+    // Função para verificar a seleção do sabor e atualizar os botões
+    document.getElementById('flavor').addEventListener('change', function() {
+        const buyNowButton = document.getElementById('buy-now-button');
+        const addToCartButton = document.getElementById('add-to-cart-button');
+        const selectedFlavor = this.value;
+
+        // Habilita ou desabilita os botões baseado na seleção
+        buyNowButton.disabled = !selectedFlavor;
+        addToCartButton.disabled = !selectedFlavor;
+
+        // Atualiza a função de adicionar ao carrinho com o sabor selecionado
+        if (selectedFlavor) {
+            addToCartButton.onclick = function() {
+                addToCart('Kit Suplementos - Sabor: ' + 
+                    document.getElementById('flavor').options[document.getElementById('flavor').selectedIndex].text, 
+                    127.90, 
+                    'https://i.ibb.co/99Y6yGHP/imagem-kit-1.webp'
+                );
+            }
+        }
+    });
+</script>
+
+<!-- Review Modal -->
+<div id="review-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+    <div class="min-h-screen px-4 text-center flex items-center justify-center">
+        <div class="inline-block bg-white rounded-2xl text-left overflow-hidden shadowxl transform transition-all sm:align-middle w-full max-w-3xl">
+            <div class="bg-gradient-to-b from-gray-50 to-white px-8 pt-6 pb-8">
+                <div class="flex justify-between items-center mb-6 border-b pb-4">
+                    <h3 class="text-2xl font-semibold text-gray-900">Avaliar Produto</h3>
+                    <button onclick="closeReviewModal()" class="text-gray-400 hover:text-gray-500 transition">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <form id="review-form" class="space-y-6">
+                    <div class="text-center mb-8">
+                        <p class="text-lg text-gray-700 mb-4">Como você avalia este produto?</p>
+                        <div class="flex justify-center space-x-2" id="rating-stars">
+                            <button type="button" data-rating="1" class="text-yellow-500 text-3xl focus:outline-none hover:scale-110 transition">
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button type="button" data-rating="2" class="text-yellow-500 text-3xl focus:outlinenone hover:scale-110 transition">
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button type="button" data-rating="3" class="text-yellow-500 text-3xl focus:outline-none hover:scale-110 transition">
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button type="button" data-rating="4" class="text-yellow-500 text-3xl focus:outline-none hover:scale-110 transition">
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button type="button" data-rating="5" class="text-yellow-500 text-3xl focus:outline-none hover:scale-110 transition">
+                                <i class="fas fa-star"></i>
+                            </button>
+                        </div>
+                        <input type="hidden" id="review-rating" value="5" required>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="review-name" class="block text-sm font-medium text-gray-700 mb-2">Nome Completo</label>
+                            <input type="text" id="review-name" required 
+                                   placeholder="Digite seu nome completo"
+                                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition">
+                        </div>
+                        <div>
+                            <label for="review-email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="review-email" required 
+                                   placeholder="Digite seu email"
+                                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="review-title" class="block text-sm font-medium text-gray-700 mb-2">Título da Avaliação</label>
+                        <input type="text" id="review-title" required 
+                               placeholder="Resuma sua experiência em uma frase"
+                               class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition">
+                    </div>
+
+                    <div>
+                        <label for="review-comment" class="block text-sm font-medium text-gray-700 mb-2">Sua Avaliação Detalhada</label>
+                        <textarea id="review-comment" rows="5" required
+                                  placeholder="Conte-nos sua experiência com o produto..."
+                                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition"></textarea>
+                        <p class="mt-2 text-sm text-gray-500">Mínimo 10 caracteres</p>
+                    </div>
+
+                    <div class="mt-8">
+                        <button type="submit" class="w-full flex justify-center items-center py-3 px-6 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-300">
+                            <i class="fas fa-spinner fa-spin mr-2 hidden"></i>
+                            <span>Publicar Avaliação</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    // Nutritional information data for each flavor
+    const nutritionalInfo = {
+        default: {
+            "Valor Energético": "114 kcal",
+            "Proteínas": "24g",
+            "Carboidratos": "3.4g",
+            "Gorduras Totais": "1.2g",
+            "Gorduras Saturadas": "0.7g",
+            "Fibra Alimentar": "0g",
+            "Sódio": "98mg",
+            "BCAA": "5.4g",
+            "Glutamina": "3.8g"
+        }
+    };
+
+    function showNutritionInfo(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const popup = document.getElementById('nutrition-popup');
+        const flavorSelect = document.getElementById('flavor');
+        const selectedFlavor = flavorSelect.options[flavorSelect.selectedIndex].text;
+        const nutritionTable = document.getElementById('nutrition-table');
+        const infoButton = document.getElementById('nutrition-info-btn');
+
+        // Set popup title
+        document.getElementById('nutrition-flavor-title').textContent = 
+            `Informação Nutricional - ${selectedFlavor}`;
+
+        // Clear existing table content
+        nutritionTable.innerHTML = '';
+
+        // Get nutritional info (use default for now)
+        const info = nutritionalInfo.default;
+
+        // Populate table with nutritional information
+        Object.entries(info).forEach(([nutrient, value]) => {
+            nutritionTable.innerHTML += `
+                <tr class="border-b border-gray-100">
+                    <td class="py-2 font-medium text-gray-700">${nutrient}</td>
+                    <td class="py-2 text-right text-gray-600">${value}</td>
+                </tr>
+            `;
+        });
+
+        // Get button position
+        const buttonRect = infoButton.getBoundingClientRect();
+
+        // Position popup
+        popup.style.position = 'fixed';
+        popup.style.top = `${buttonRect.bottom + window.scrollY + 10}px`;
+        popup.style.left = `${Math.max(10, buttonRect.left - 300)}px`;
+
+        // Show popup
+        popup.classList.remove('hidden');
+
+        // Add click outside listener
+        document.addEventListener('click', closePopupOnClickOutside);
+    }
+
+    function closeNutritionPopup() {
+        const popup = document.getElementById('nutrition-popup');
+        if (!popup.classList.contains('hidden')) {
+            popup.classList.add('hidden');
+            document.removeEventListener('click', closePopupOnClickOutside);
+        }
+    }
+
+    function closePopupOnClickOutside(event) {
+        const popup = document.getElementById('nutrition-popup');
+        const infoButton = document.getElementById('nutrition-info-btn');
+
+        if (!popup.contains(event.target) && !infoButton.contains(event.target)) {
+            closeNutritionPopup();
+        }
+    }
+
+    // Show/hide nutrition info button based on flavor selection
+    document.getElementById('flavor').addEventListener('change', function() {
+        const nutritionInfoBtn = document.getElementById('nutrition-info-btn');
+        const selectedFlavor = this.value;
+
+        // Show/hide nutrition info button
+        nutritionInfoBtn.classList.toggle('hidden', !selectedFlavor);
+
+        // Close popup if it's open
+        closeNutritionPopup();
+    });
+</script>
+
+<!-- Footer Section -->
+<footer class="bg-white mt-16 border-t">
+    <!-- Selos e Avaliações -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-items-center">
+            <div class="w-full max-w-[200px]">
+                <img class="w-full max-w-[100px]" src="https://www.gsuplementos.com.br/tema/growth/img/home/selos-final/02.jpg" alt="Site Blindado" class="w-full">
+            </div>
+            <div class="w-full max-w-[100px]">
+                <img src="https://newimgebit-a.akamaihd.net/ebitBR/selo/img_33128.png" alt="Google Safe Browsing" class="w-full">
+            </div>
+            <div class="w-full max-w-[200px]">
+                <div class="bg-gray-50 p-4 rounded-lg text-center">
+                    <div class="flex items-center justify-center mb-2">
+                        <span class="text-4xl font-bold text-primary">4.8</span>
+                        <span class="text-sm text-gray-500 ml-1">/5</span>
+                    </div>
+                    <div class="flex text-yellow-400 justify-center mb-1">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-sm text-gray-600">Nota média da loja</p>
+                </div>
+            </div>
+            <div class="w-full max-w-[200px]">
+                <img class="w-full max-w-[100px]" src="https://www.gsuplementos.com.br/tema/growth/img/home/selos-final/04.jpg" alt="Selo Compra Segura" class="w-full">
+            </div>
+        </div>
+    </div>
+
+    <!-- Formas de Pagamento -->
+    <div class="bg-gray-50 py-8">
+        <div class="container mx-auto px-4">
+            <h3 class="text-lg font-semibold text-gray-800 mb-6">Formas de Pagamento</h3>
+            <div class="grid grid-cols-7 sm:grid-cols-7 px-12  md:grid-cols-7 lg:grid-cols-8 gap-4">
+                <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/01.abefb7d.svg" alt="Visa" class="h-8">
+                <img  class="max-w-[35px]"  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNy43MzgiIGhlaWdodD0iMTcuMjIyIiB2aWV3Qm94PSIwIDAgMjcuNzM4IDE3LjIyMiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2LjEzMSAtMTEuMzg5KSI+PGNpcmNsZSBjeD0iOC41OTkiIGN5PSI4LjU5OSIgcj0iOC41OTkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI2LjY3MSAxMS40MTMpIiBmaWxsPSIjZjc5ZTFiIj48L2NpcmNsZT48Y2lyY2xlIGN4PSI4LjU5OSIgY3k9IjguNTk5IiByPSI4LjU5OSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTYuMTMxIDExLjM4OSkiIGZpbGw9IiNlYjAwMWIiPjwvY2lyY2xlPjxwYXRoIGQ9Ik0yNi42NzEsMTkuOTkzYTguNTg2LDguNTg2LDAsMCwwLDMuMzEzLDYuOCw4LjYsOC42LDAsMCwwLC4wMzMtMTMuNTkxQTguNTc1LDguNTc1LDAsMCwwLDI2LjY3MSwxOS45OTNaIiBmaWxsPSIjZmY1ZjAwIj48L3BhdGg+PC9nPjwvc3ZnPgo=" alt="Mastercard" class="h-8">
+                <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/03.f3c5809.svg" alt="Elo" class="h-8">
+                <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/04.88ddfe2.svg" alt="American Express" class="h-8">
+                <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/05.e0cc06e.svg" alt="PIX" class="h-8">
+                <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/06.4d61f68.svg" alt="Boleto" class="h-8">
+                <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/07.8d5f548.svg" alt="PayPal" class="h-8">
+                <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/07.8d5f548.svg" alt="PayPal" class="h-8">
+                 <img  class="max-w-[35px]"   src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMi4zMyIgaGVpZ2h0PSIyMC4xMDkiIHZpZXdCb3g9IjAgMCAzMi4zMyAyMC4xMDkiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMy44MzUgLTkuOTQ1KSI+PHJlY3Qgd2lkdGg9IjEuOTc2IiBoZWlnaHQ9IjIwLjEwOSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMuODM1IDkuOTQ1KSI+PC9yZWN0PjxyZWN0IHdpZHRoPSIxLjk3NiIgaGVpZ2h0PSIyMC4xMDkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI1Ljk5MSA5Ljk0NSkiPjwvcmVjdD48cmVjdCB3aWR0aD0iMS45NzYiIGhlaWdodD0iMjAuMTA5IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNi4xIDkuOTQ1KSI+PC9yZWN0PjxyZWN0IHdpZHRoPSIxLjk3NiIgaGVpZ2h0PSIyMC4xMDkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQwLjEyMSA5Ljk0NSkiPjwvcmVjdD48cmVjdCB3aWR0aD0iMS45NzYiIGhlaWdodD0iMjAuMTA5IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0NC4xODkgOS45NDUpIj48L3JlY3Q+PHJlY3Qgd2lkdGg9IjQuMDE5IiBoZWlnaHQ9IjIwLjEwOSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAuMDEyIDkuOTQ1KSI+PC9yZWN0PjxyZWN0IHdpZHRoPSI2LjA0MSIgaGVpZ2h0PSIyMC4xMDkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE3Ljg3OSA5Ljk0NSkiPjwvcmVjdD48L2c+PC9zdmc+Cg==" alt="PayPal" class="h-8">
+                 <img  class="max-w-[35px]" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDYwIDQwIj4KICA8cGF0aCBkPSJNNjAsMzVhNS4wMTUsNS4wMTUsMCwwLDEtNSw1SDVhNS4wMTUsNS4wMTUsMCwwLDEtNS01VjVBNS4wMTUsNS4wMTUsMCwwLDEsNSwwSDU1YTUuMDE1LDUuMDE1LDAsMCwxLDUsNVoiIGZpbGw9IiNmZmVkMDAiPjwvcGF0aD4KICA8cGF0aCBkPSJNMTkuNTI5LDIzLjY0NywzMCwzMC42MjVsMTAuNDc0LTYuOTc5LTQuNC0yLjkzNi01LDMuMzMsMi40MzksMS42M0wzMCwyOC4wMTdsLTYuNTU0LTQuMzcyLDEwLjk0My03LjMtMS45NTctMS4zMDZaIiBmaWxsPSIjMjI1MTk4Ij48L3BhdGg+CiAgPHBhdGggZD0iTTM2LjU1NywxMi4zLDM4LjUxNCwxMy42bDIuMTY5LTEuNDQ4VjkuNTQ5Wk0yNS42MDgsMjMuNjQ3bDEuOTU3LDEuMzA2TDQwLjQ3LDE2LjM0NSwzMCw5LjM3NSwxOS41MjksMTYuMzQ2bDQuMzg4LDIuOTMsNS0zLjMzNi0yLjQzOS0xLjYwOSwzLjUxNS0yLjM0OSw2LjU2MSw0LjM3MVptLTYuMjksNC4yVjMwLjQ1TDIzLjQ0MywyNy43LDIxLjQ4NiwyNi40WiIgZmlsbD0iIzIyNTE5OCI+PC9wYXRoPgo8L3N2Zz4K" alt="PayPal" class="h-8">
+                 <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/10.3fa8833.svg" alt="PayPal" class="h-8">
+                 <img class="max-w-[35px]"  src="https://www.gsuplementos.com.br/_nuxt/img/11.e034f67.svg" alt="PayPal" class="h-8">
+                 <img class="max-w-[35px]" src="https://www.gsuplementos.com.br/_nuxt/img/12.e906bcc.svg" alt="PayPal" class="h-8">
+            </div>
+        </div>
+    </div>
+
+    <!-- Links e Informações -->
+    <div class="container mx-auto px-4 py-12">
+        <div class="grid md:grid-cols-4 gap-8">
+            <!-- Sobre -->
+            <div>
+                <h4 class="text-gray-800 font-semibold mb-4">Sobre a Growth Supplements</h4>
+                <ul class="space-y-2">
+                    <li><a href="/quem-somos" class="text-gray-600 hover:text-primary">Quem Somos</a></li>
+                    <li><a href="/fale-conosco" class="text-gray-600 hover:text-primary">Fale Conosco</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-primary">Blog</a></li>
+                    <li><a href="/seguranca-e-privacidade" class="text-gray-600 hover:text-primary">Segurança e Privacidade</a></li>
+                </ul>
+            </div>
+
+            <!-- Ajuda -->
+            <div>
+                <h4 class="text-gray-800 font-semibold mb-4">Ajuda</h4>
+                <ul class="space-y-2">
+                    <li><a href="/politica-de-troca" class="text-gray-600 hover:text-primary">Política de Troca e Devolução</a></li>
+                    <li><a href="/envio-da-encomenda" class="text-gray-600 hover:text-primary">Envio da encomenda</a></li>
+                    <li><a href="/politica-de-entrega" class="text-gray-600 hover:text-primary">Política de Entrega</a></li>
+                    <li><a href="/perguntas-frequentes" class="text-gray-600 hover:text-primary">Perguntas Frequentes</a></li>
+                </ul>
+            </div>
+
+            <!-- Contato -->
+            <div>
+                <h4 class="text-gray-800 font-semibold mb-4">Contato</h4>
+                <ul class="space-y-3">
+                    <li class="flex items-center text-gray-600">
+                        <i class="fas fa-phone-alt mr-2 text-primary"></i>
+                        <span>(11) 3003-3991</span>
+                    </li>
+                    <li class="text-sm text-gray-500">Seg a Sex das 8h às 12h | das 13h30 às 18h</li>
+                    <li class="flex items-center text-gray-600">
+                        <i class="fas fa-envelope mr-2 text-primary"></i>
+                        <a href="mailto:sac@growthsupplements.com.br" class="hover:text-primary">
+                            growth@atendimento.com.br
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Redes Sociais -->
+            <div>
+                <h4 class="text-gray-800 font-semibold mb-4">Redes Sociais</h4>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-primary text-xl">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-primary text-xl">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-primary text-xl">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-primary text-xl">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-primary text-xl">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-primary text-xl">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Informações Legais -->
+    <div class="bg-primary text-white py-4">
+        <div class="container mx-auto px-4 text-center text-sm">
+            <p class="mb-2">Growth Supplements Produtos Alimentícios LTDA - Todos os direitos reservados - CNPJ 10.832.644/0001-98</p>
+            <p>Av. Wilson Lemos, 2850, Galpão 18, 19, 22, 23, 24 e 27, Santa Lúcia - Tijucas - SC - CEP 88200-958</p>
+        </div>
+    </div>
+
+    <!-- Avisos Legais -->
+    <div class="bg-gray-50 py-4 text-xs text-gray-500">
+        <div class="container flex items-center gap-4 justify-center mx-auto px-4 text-center">
+            <img class="max-h-[21px]" src="https://www.gsuplementos.com.br/_nuxt/img/uappi.e30eeb1.svg" />
+            <img class="max-h-[21px]"  src="https://www.gsuplementos.com.br/tema/growth/img/rodape/icones/logo-deluca.svg"/>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

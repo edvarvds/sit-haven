@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Envio da Encomenda - Rossi Suplementos{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Envio da Encomenda</h1>
+    
+    <div class="bg-white rounded-lg shadow-sm p-6 space-y-8">
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Status do Pedido</h2>
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <div class="text-center p-4 border border-gray-200 rounded-lg">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-shopping-cart text-primary text-xl"></i>
+                    </div>
+                    <h3 class="font-medium text-gray-800 text-sm">Pedido Realizado</h3>
+                </div>
+                <div class="text-center p-4 border border-gray-200 rounded-lg">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-credit-card text-primary text-xl"></i>
+                    </div>
+                    <h3 class="font-medium text-gray-800 text-sm">Pagamento Confirmado</h3>
+                </div>
+                <div class="text-center p-4 border border-gray-200 rounded-lg">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-box text-primary text-xl"></i>
+                    </div>
+                    <h3 class="font-medium text-gray-800 text-sm">Em Separação</h3>
+                </div>
+                <div class="text-center p-4 border border-gray-200 rounded-lg">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-truck text-primary text-xl"></i>
+                    </div>
+                    <h3 class="font-medium text-gray-800 text-sm">Em Transporte</h3>
+                </div>
+                <div class="text-center p-4 border border-gray-200 rounded-lg">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-check-circle text-primary text-xl"></i>
+                    </div>
+                    <h3 class="font-medium text-gray-800 text-sm">Entregue</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Prazo de Entrega</h2>
+            <p class="text-gray-600 leading-relaxed">
+                O prazo de entrega varia de acordo com a sua localização e a modalidade de frete escolhida. 
+                Após a confirmação do pagamento, seu pedido será processado e enviado dentro de 1 dia útil.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-4 border border-gray-200 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">PAC</h3>
+                    <p class="text-gray-600">4 a 12 dias úteis</p>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">SEDEX</h3>
+                    <p class="text-gray-600">1 a 3 dias úteis</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Rastreamento</h2>
+            <p class="text-gray-600 leading-relaxed">
+                Assim que seu pedido for despachado, você receberá um e-mail com o código de rastreamento. 
+                Com ele, você poderá acompanhar o status da entrega diretamente no site dos Correios.
+            </p>
+            <div class="p-4 bg-gray-50 rounded-lg">
+                <h3 class="font-medium text-gray-800 mb-2">Como rastrear seu pedido:</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-600">
+                    <li>Acesse o site dos Correios</li>
+                    <li>Insira o código de rastreamento recebido por e-mail</li>
+                    <li>Acompanhe o status da entrega em tempo real</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Dúvidas Frequentes</h2>
+            <div class="space-y-4">
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Quando meu pedido será enviado?</h3>
+                    <p class="text-gray-600">
+                        Após a confirmação do pagamento, seu pedido será processado e enviado em até 1 dia útil.
+                    </p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Como sei se meu pedido já foi enviado?</h3>
+                    <p class="text-gray-600">
+                        Você receberá um e-mail com o código de rastreamento assim que seu pedido for despachado.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-4 bg-primary/10 rounded-lg">
+            <p class="text-gray-700 text-center">
+                Não encontrou o que procurava? 
+                <a href="{{ url_for('contact') }}" class="text-primary hover:underline">Entre em contato conosco</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

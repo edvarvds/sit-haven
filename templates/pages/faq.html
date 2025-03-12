@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}Perguntas Frequentes - Growth Suplementos{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Perguntas Frequentes</h1>
+    
+    <div class="bg-white rounded-lg shadow-sm p-6 space-y-8">
+        <!-- Seção de Pedidos -->
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Pedidos</h2>
+            <div class="space-y-4">
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Como faço para acompanhar meu pedido?</h3>
+                    <p class="text-gray-600">
+                        Após a confirmação do envio, você receberá um e-mail com o código de rastreamento. 
+                        Com ele, você pode acompanhar seu pedido diretamente no site dos Correios.
+                    </p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Qual o prazo de entrega?</h3>
+                    <p class="text-gray-600">
+                        O prazo varia de acordo com a modalidade escolhida:
+                        PAC: 4 a 12 dias úteis
+                        SEDEX: 1 a 3 dias úteis
+                    </p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Como cancelar um pedido?</h3>
+                    <p class="text-gray-600">
+                        Para cancelar um pedido, entre em contato com nosso SAC imediatamente após a compra. 
+                        Caso o pedido já tenha sido enviado, será necessário seguir nossa política de devolução.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Produtos -->
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Produtos</h2>
+            <div class="space-y-4">
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Os produtos são originais?</h3>
+                    <p class="text-gray-600">
+                        Sim, todos os nossos produtos são 100% originais e adquiridos diretamente dos fabricantes 
+                        ou distribuidores autorizados.
+                    </p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Qual o prazo de validade dos produtos?</h3>
+                    <p class="text-gray-600">
+                        Todos os produtos são enviados com no mínimo 6 meses de validade. A data específica 
+                        pode ser consultada na embalagem do produto.
+                    </p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Como devo armazenar os suplementos?</h3>
+                    <p class="text-gray-600">
+                        Mantenha os produtos em local seco, fresco e ao abrigo da luz. Após aberto, 
+                        siga as instruções específicas do fabricante na embalagem.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Pagamentos -->
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Pagamentos</h2>
+            <div class="space-y-4">
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Quais formas de pagamento são aceitas?</h3>
+                    <p class="text-gray-600">
+                        Aceitamos cartões de crédito, boleto bancário e PIX. Para cartões, 
+                        parcelamos em até 12x sem juros.
+                    </p>
+
+                    <strong class="text-gray-600">
+                        Promoções de queima de Estoque só são aceitas através do PIX.
+                    </strong>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">O site é seguro para compras?</h3>
+                    <p class="text-gray-600">
+                        Sim, nosso site utiliza certificado SSL e todas as transações são criptografadas. 
+                        Seus dados estão protegidos.
+                    </p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Quanto tempo para confirmar o pagamento?</h3>
+                    <p class="text-gray-600">
+                        - Cartão de crédito: confirmação imediata<br>
+                        - PIX: até 30 minutos<br>
+                        - Boleto: até 2 dias úteis após o pagamento
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Trocas e Devoluções -->
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Trocas e Devoluções</h2>
+            <div class="space-y-4">
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Qual o prazo para devolução?</h3>
+                    <p class="text-gray-600">
+                        Você tem até 7 dias após o recebimento para solicitar a devolução por arrependimento, 
+                        conforme o Código de Defesa do Consumidor.
+                    </p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Como funciona a troca?</h3>
+                    <p class="text-gray-600">
+                        Em caso de produtos com defeito, entre em contato com nosso SAC em até 30 dias após 
+                        o recebimento. Enviaremos as instruções para troca.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-4 bg-primary/10 rounded-lg">
+            <p class="text-gray-700 text-center">
+                Não encontrou a resposta que procurava? 
+                <a href="{{ url_for('contact') }}" class="text-primary hover:underline">Entre em contato conosco</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

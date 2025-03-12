@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Política de Troca e Devolução - Growth Suplementos{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Política de Troca e Devolução</h1>
+    
+    <div class="bg-white rounded-lg shadow-sm p-6 space-y-8">
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Direito de Arrependimento</h2>
+            <p class="text-gray-600 leading-relaxed">
+                De acordo com o Código de Defesa do Consumidor, você tem até 7 (sete) dias após o recebimento do produto 
+                para solicitar a devolução ou troca por arrependimento. O produto deve estar em sua embalagem original, 
+                sem sinais de uso e acompanhado da nota fiscal.
+            </p>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Como Solicitar uma Troca ou Devolução</h2>
+            <div class="space-y-4">
+                <div class="flex items-start space-x-4">
+                    <div class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <span class="text-primary font-semibold">1</span>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Entre em Contato</h3>
+                        <p class="text-gray-600">
+                            Entre em contato com nosso SAC através do e-mail sac@growthsuplementos.com.br ou pelo 
+                            telefone (11) 1234-5678, informando o número do pedido e o motivo da troca/devolução.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <span class="text-primary font-semibold">2</span>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Embale o Produto</h3>
+                        <p class="text-gray-600">
+                            Embale o produto adequadamente, incluindo todos os itens que acompanham o produto, 
+                            como manual, acessórios e nota fiscal.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <span class="text-primary font-semibold">3</span>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Envie o Produto</h3>
+                        <p class="text-gray-600">
+                            Após nossa análise e aprovação, enviaremos um código de postagem para que você possa 
+                            enviar o produto sem custos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Condições para Troca ou Devolução</h2>
+            <ul class="list-disc list-inside space-y-2 text-gray-600">
+                <li>O produto deve estar em sua embalagem original</li>
+                <li>Todos os itens e acessórios devem estar presentes</li>
+                <li>O produto não pode apresentar sinais de uso</li>
+                <li>A nota fiscal deve acompanhar o produto</li>
+                <li>O prazo de 7 dias deve ser respeitado</li>
+            </ul>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Prazo para Reembolso</h2>
+            <p class="text-gray-600 leading-relaxed">
+                Após recebermos o produto em nosso Centro de Distribuição e confirmarmos que está tudo conforme 
+                as condições acima, o reembolso será processado em até 5 dias úteis, na mesma forma de pagamento 
+                utilizada na compra.
+            </p>
+        </div>
+
+        <div class="p-4 bg-primary/10 rounded-lg">
+            <p class="text-gray-700 text-center">
+                Tem alguma dúvida sobre nossa política de trocas e devoluções? 
+                <a href="{{ url_for('contact') }}" class="text-primary hover:underline">Entre em contato</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
