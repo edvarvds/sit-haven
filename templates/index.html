@@ -5,11 +5,12 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Suplements Product Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet"/>
     <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/4ee687d42f.js" crossorigin="anonymous"></script>
     
     <script
       src="https://cdn.utmify.com.br/scripts/utms/latest.js"
@@ -23,11 +24,11 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        'sans': ['Poppins', 'sans-serif'],
+                        'sans': ['Nunito', 'sans-serif'],
                     },
                     colors: {
-                        'primary': '#1899d5',
-                        'primary-hover': '#158bc2',
+                        'primary': '#0C3BDD',
+                        'primary-hover': '#0A32B8',
                         'green-primary': '#00cf00' // Added green color
                     }
                 }
@@ -36,10 +37,10 @@
     </script>
     <style>
         * {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Nunito', sans-serif;
         }
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Nunito', sans-serif;
         }
         .main-product-image {
             opacity: 1;
@@ -208,6 +209,180 @@
         #nopadding {
             padding: 0 !important;
         }
+        
+        /* Estilos para as opções de pagamento */
+        .payments-wrapper {
+            margin-top: 1rem;
+            padding: 0.75rem 0;
+        }
+        
+        .payments-title {
+            font-size: 0.875rem;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .payments-list {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .payment {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0.75rem;
+            background-color: #f7f9fc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .payment:hover {
+            background-color: #edf2f7;
+            border-color: #cbd5e0;
+        }
+        
+        .payment i {
+            margin-right: 0.5rem;
+            color: #0C3BDD;
+        }
+        
+        .payment.pix {
+            background-color: #e9f9e6;
+            border-color: #c5e8c1;
+        }
+        
+        .payment.pix:hover {
+            background-color: #d7f5d3;
+            border-color: #b3e0ae;
+        }
+        
+        .payment.pix i {
+            color: #006627;
+        }
+        
+        /* Estilos para o cálculo de frete */
+        .shipping-quotation-wrapper {
+            margin-top: 1.5rem;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        
+        .shipping-quotation-input {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .shipping-quotation-input label {
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .postcode-input {
+            position: relative;
+        }
+        
+        #product-shipping-postcode {
+            border: 1px solid #cbd5e0;
+            border-radius: 0.375rem;
+            padding: 0.625rem 0.75rem;
+            width: 100%;
+            max-width: 200px;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        #product-shipping-postcode:focus {
+            outline: none;
+            border-color: #0C3BDD;
+            box-shadow: 0 0 0 3px rgba(12, 59, 221, 0.1);
+        }
+        
+        .actions {
+            margin-top: 0;
+        }
+        
+        #product-shipping-button {
+            background-color: #0C3BDD;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        #product-shipping-button:hover {
+            background-color: #0a2eb8;
+        }
+        
+        .cep-search-product {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: #4a5568;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        
+        .delivery-warning {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .delivery-warning i {
+            color: #0C3BDD;
+        }
+        
+        .product-shipping-table {
+            width: 100%;
+            margin-top: 1rem;
+            border-collapse: collapse;
+        }
+        
+        .carrier-title th {
+            text-align: left;
+            padding: 0.5rem 0;
+            font-weight: 500;
+            color: #4a5568;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .carrier-pickupstore td,
+        .carrier-flatrate td {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .highlight {
+            margin-bottom: 0.25rem;
+        }
+        
+        .error-message {
+            color: #e53e3e;
+        }
+        
+        .calculating {
+            display: flex;
+            justify-content: center;
+            padding: 1rem 0;
+        }
     </style>
 </head>
 <body id="nopadding" class="bg-gray-100">
@@ -229,31 +404,89 @@
             </div>
         </div>
     </div>
-    <div class="bg-primary text-white text-center py-2 text-xs" id="promo-banner"></div>
-
-    <script>
-        const today = new Date();
-        const day = today.getDate().toString().padStart(2, '0'); 
-        const month = (today.getMonth() + 1).toString().padStart(2, '0'); 
-        document.getElementById("promo-banner").innerText = `ÚLTIMO DIA DE QUEIMA DE ESTOQUE - ${day}/${month}`;
-    </script>
 
     <header class="bg-primary shadow-md">
-        <div class="container mx-auto px-4 py-2">
-            <div class="flex items-center justify-center relative">
-                <button onclick="toggleSideMenu()" class="text-white focus:outline-none md:hidden absolute left-0">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <img alt="Rossi Logo" class="h-8" src="https://www.gsuplementos.com.br/_nuxt/img/logo.b3d268e.svg"/>
-                <div class="absolute right-0">
-                    <button onclick="toggleCart()" class="text-white focus:outline-none hover:text-gray-200 transition relative">
-                        <i class="fas fa-shopping-cart text-lg"></i>
-                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center" id="cart-count">0</span>
+        <div class="container mx-auto px-4 py-3">
+            <div class="header content flex items-center justify-between relative">
+                <div class="flex items-center">
+                    <a href="javascript:void(0);" onclick="history.go(-1);">
+                        <button class="back-to-header text-white">
+                            <i class="h-icon h-arrow-left text-xl"></i>
+                        </button>
+                    </a>
+                    <a class="logo notlazy ml-3 -mt-1" href="{{ url_for('index') }}" title="Havan | Tudo num só Lugar">
+                        <img alt="Havan | Tudo num só Lugar" class="h-4" src="https://www.havan.com.br/static/version1739247337/frontend/Havan/themeDefault/pt_BR/images/svg/logo-havan-slim-w.svg"/>
+                    </a>
+                </div>
+                
+                <div class="flex items-center">
+                    <div class="block block-search hidden md:block mr-3">
+                        <div class="block block-content">
+                            <div class="bnly-search__input-container">
+                                <form class="bn-search__field flex items-center bg-white rounded-md overflow-hidden">
+                                    <input class="bn-search__input px-3 py-2 w-full outline-none text-sm" placeholder="Buscar na Havan" type="text">
+                                    <button type="submit" class="bn-search__submit px-3 py-2 bg-white">
+                                        <i class="h-icon h-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="search-icon" onclick="openSearchbar()" class="text-white focus:outline-none hover:text-gray-200 transition md:hidden">
+                        <i class="h-icon h-search"></i>
                     </button>
+                    
+                    <nav aria-label="Navegação do usuário" class="navigation-my-account ml-3">
+                        <button type="button" id="sidebar-collapse-button" aria-label="Botão Minha Conta" class="text-white focus:outline-none" onclick="toggleSideMenu()">
+                            <i class="h-icon h-user"></i>
+                        </button>
+                    </nav>
+                    
+                    <div class="minicart-wrapper ml-3">
+                        <a class="action showcart text-white focus:outline-none hover:text-gray-200 transition relative" href="#" onclick="toggleCart()">
+                            <i class="h-icon h-cart icon-minicart"></i>
+                            <div class="minicart-ellipse">
+                                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center" id="cart-count">0</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <div class="container mx-auto px-4 py-2 flex items-center">
+            <button class="get-my-location mr-3 text-[#334156] focus:outline-none" onclick="getLocation()" title="Coletar posição aproximada por GPS" aria-label="Coletar posição aproximada por GPS">
+                <i class="h-icon h-location"></i>
+            </button>
+            <input type="tel" inputmode="numeric" name="postcode" id="shipping-postcode" class="bg-transparent text-[#334156] px-2 py-1 text-sm w-32 font-nunito font-bold placeholder-[#8596AD] placeholder-opacity-70 focus:outline-none" data-validate="{required:true, 'stripped-min-length': 9}" title="Código Postal" placeholder="Digite o CEP" maxlength="9">
+            <span class="hidden-message text-sm text-red-200 ml-2" id="header-postcode-message-container"></span>
+        </div>
     </header>
+
+    <!-- Adicionar o ícone de localização no CSS -->
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                document.getElementById("header-postcode-message-container").innerHTML = "Geolocalização não é suportada neste navegador.";
+                document.getElementById("header-postcode-message-container").classList.remove("hidden");
+            }
+        }
+        
+        function showPosition(position) {
+            // Aqui você pode implementar a lógica para converter coordenadas em CEP
+            // Por enquanto, apenas mostramos uma mensagem
+            document.getElementById("header-postcode-message-container").innerHTML = "Localização obtida com sucesso!";
+            document.getElementById("header-postcode-message-container").classList.remove("hidden");
+            
+            // Após alguns segundos, esconde a mensagem
+            setTimeout(function() {
+                document.getElementById("header-postcode-message-container").classList.add("hidden");
+            }, 3000);
+        }
+    </script>
 
     <!-- Side Menu -->
     <div id="side-menu" class="fixed inset-y-0 left-0 w-64 bg-gray-800 shadow-xl transform -translate-x-full transition-transform duration-300 ease-in-out z-50">
@@ -389,305 +622,256 @@
         </div>
     </div>
 
-    <nav class="bg-gray-50 py-2 px-4 text-gray-600 text-sm">
-        <div class="container mx-auto">
-            <a class="hover:text-primary" href="#">Início</a>
-            <span> > </span>
-            <a class="hover:text-primary" href="#">Promoção</a>
-            <span> > </span>
-            <span>(ÚLTIMO DIA DE PROMOÇÃO) - Kit 2 Whey 1kg + 2 Creatinas 250g + Pré-Treino Haze 300g + Multivitamínico 120caps</span
-        </div>
-    </nav>
-
     <main class="container mx-auto px-4 py-8">
         <div class="grid md:grid-cols-2 gap-8">
             <div>
                 <div class="product-gallery relative">
-                    <div class="main-image-container relative">
+                    <div class="flex justify-end mb-2">
+                        <p class="text-gray-600 text-sm">Cód.: 418005-3</p>
+                    </div>
+                    <div class="main-image-container relative touch-manipulation">
                         <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-primary p-2 rounded-r-lg shadow-md z-10 transition-all md:p-3" id="prevImage">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <img alt="KIT VISAO PRINCIPAL" class="w-full rounded-lg shadow-md main-product-image object-contain aspect-square" src="https://i.ibb.co/99Y6yGHP/imagem-kit-1.webp"/>
+                        <img alt="KIT VISAO PRINCIPAL" class="w-full rounded-lg shadow-md main-product-image object-contain aspect-square" src="https://i.ibb.co/99Y6yGHP/imagem-kit-1.webp" id="mainProductImage"/>
                         <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-primary p-2 rounded-l-lg shadow-md z-10 transition-all md:p-3" id="nextImage">
                             <i class="fas fa-chevron-right"></i>
                         </button>
-                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2" id="imageIndicators">
-                            <!-- Indicadores serão adicionados via JavaScript -->
+                        
+                        <!-- Novo contador de estado com traços horizontais no estilo Havan -->
+                        <div class="fotorama__nav__shaft flex justify-center items-center mt-4 mb-3" id="dotsContainer">
+                            <!-- Os traços serão adicionados via JavaScript -->
+                        </div>
+                        
+                        <!-- Miniaturas ocultas para referência de imagens -->
+                        <div class="hidden">
+                            <img alt="Vista Principal" class="product-thumbnail" data-index="0" src="https://i.ibb.co/99Y6yGHP/imagem-kit-1.webp"/>
+                            <img alt="Vista Principal" class="product-thumbnail" data-index="1" src="https://i.ibb.co/57Zv8kD/imagem-kit-2.webp"/>
+                            <img alt="Vista Lateral" class="product-thumbnail" data-index="2" src="https://i.ibb.co/5xxc1z9Z/imagem-kit-3.webp"/>
+                            <img alt="Vista Frontal" class="product-thumbnail" data-index="3" src="https://i.ibb.co/mVJS05Gw/imagem-kit-4.webp"/>
+                            <img alt="Vista Posterior" class="product-thumbnail" data-index="4" src="https://i.ibb.co/4Z4vr3pb/imagem-kit-5.webp"/>
                         </div>
                     </div>
-                    <div class="flex justify-start space-x-3 overflow-x-auto pb-2 px-1 thumbnails-container hide-scrollbar">
-                        <img alt="Vista Principal" class="product-thumbnail ring-2 ring-primary p-0.5 active" data-index="0" src="https://i.ibb.co/99Y6yGHP/imagem-kit-1.webp"/>
-                        <img alt="Vista Principal" class="product-thumbnail" data-index="1" src="https://i.ibb.co/57Zv8kD/imagem-kit-2.webp"/>
-                        <img alt="Vista Lateral" class="product-thumbnail" data-index="2" src="https://i.ibb.co/5xxc1z9Z/imagem-kit-3.webp"/>
-                        <img alt="Vista Frontal" class="product-thumbnail" data-index="3" src="https://i.ibb.co/mVJS05Gw/imagem-kit-4.webp"/>
-                        <img alt="Vista Posterior" class="product-thumbnail" data-index="4" src="https://i.ibb.co/4Z4vr3pb/imagem-kit-5.webp"/>
-                    </div>
-                </div>
-                <div class="space-y-4 mt-6">
-                    <div>
-                        <h1 class="text-gray-800 text-2xl font-semibold mb-3">(ÚLTIMO DIA DE PROMOÇÃO) - Kit 2 Whey 1kg + 2 Creatinas 250g + Pré-Treino Haze 300g + Multivitamínico 120caps</h1>
-                        <a href="#reviews" class="flex items-center hover:opacity-90 transition-opacity mb-4">
-                            <div class="flex text-yellow-500">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <span class="text-gray-500 text-sm ml-2">(3.867 avaliações)</span>
-                        </a>
-                    </div>
-
-                    <div class="space-y-2">
-                        <p class="text-gray-600 text-2xl line-through">R$ 179,90</p>
-                        <div class="flex items-center gap-3">
-                            <p class="text-primary text-3xl font-bold">R$ 127,90</p>
-                            <div class="bg-gradient-to-r from-red-50 to-red-100 text-red-600 px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 border border-red-200 shadow-sm hover:shadow transition-all">
-                                <div class="flex items-center">
-                                    <span class="text-lg font-semibold">28</span>
-                                    <i class="fas fa-percent text-xs ml-0.5"></i>
-                                </div>
-                                <i class="fas fa-arrow-down text-xs animate-bounce"></i>
-                                <span class="font-medium">OFF</span>
-                            </div>
-                        </div>
-
-                        <!-- Flavor Selection -->
-                        <div class="mt-6 space-y-3">
-                            <label for="flavor" class="block text-gray-700 font-medium">
-                                Selecione o Sabor do Whey
-                                <span class="text-red-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <select id="flavor" 
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white appearance-none cursor-pointer"
-                                        required>
-                                    <option value="" disabled selected>Escolha um sabor</option>
-                                    <option value="chocolate">Chocolate</option>
-                                    <option value="morango">Morango</option>
-                                    <option value="baunilha">Baunilha</option>
-                                    <option value="natural">Natural</option>
-                                    <option value="banana">Banana</option>
-                                    <option value="cappuccino">Cappuccino</option>
-                                    <option value="doce-de-leite">Doce de leite</option>
-                                    <option value="chocolate-amendoim">Chocolate com amendoim</option>
-                                    <option value="cookies-cream">Cookies and Cream</option>
-                                    <option value="sorvete-creme">Sorvete de Creme</option>
-                                    <option value="caramelo">Caramelo</option>
-                                    <option value="mousse-maracuja">Mousse de Maracujá</option>
-                                    <option value="torta-limao">Torta de Limão</option>
-                                    <option value="chocolate-milkshake">Chocolate Milk Shake</option>
-                                    <option value="chocolate-branco">Chocolate Branco</option>
-                                    <option value="beijinho">Beijinho</option>
-                                    <option value="brigadeiro">Brigadeiro</option>
-                                    <option value="leite-po">Leite em Pó</option>
-                                    <option value="chocolate-morango">Chocolate com Morango</option>
-                                </select>
-                                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-gray-500">
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                                <button id="nutrition-info-btn" 
-                                        onclick="showNutritionInfo(event)" 
-                                        class="absolute right-8 top-1/2 transform -translate-y-1/2 text-primary hover:text-primary-hover transition hidden"
-                                        title="Ver informação nutricional">
-                                    <i class="fas fa-info-circle text-xl"></i>
-                                </button>
-                            </div>
-                            
-                            <!-- Nutritional Info Popup -->
-                            <div id="nutrition-overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-[9999]">
-                                <div id="nutrition-popup" class="relative bg-white rounded-xl shadow-2xl p-6 max-w-md mx-auto my-8 w-11/12 md:w-full">
-                                    <div class="flex justify-between items-center mb-4 border-b pb-3">
-                                        <h3 class="text-xl font-semibold text-gray-800" id="nutrition-flavor-title">Informação Nutricional</h3>
-                                        <button onclick="closeNutritionPopup()" class="text-gray-500 hover:text-gray-700 transition">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </div>
-                                    <div class="space-y-4">
-                                        <div class="bg-gray-50 p-4 rounded-lg">
-                                            <p class="text-sm text-gray-600">Porção de 30g (2 medidas)</p>
-                                        </div>
-                                        <table class="w-full text-sm">
-                                            <tbody id="nutrition-table">
-                                                <!-- Nutritional info will be populated here -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <script>
-                                function showNutritionInfo(event) {
-                                    event.preventDefault();
-                                    const overlay = document.getElementById('nutrition-overlay');
-                                    overlay.classList.remove('hidden');
-                                    overlay.classList.add('flex');
-                                    
-                                    // Prevent body scroll when popup is open
-                                    document.body.style.overflow = 'hidden';
-
-                                    // Populate nutrition info based on selected flavor
-                                    const selectedFlavor = document.getElementById('flavor').value;
-                                    document.getElementById('nutrition-flavor-title').textContent = 
-                                        `Informação Nutricional - ${document.getElementById('flavor').options[document.getElementById('flavor').selectedIndex].text}`;
-                                }
-
-                                function closeNutritionPopup() {
-                                    const overlay = document.getElementById('nutrition-overlay');
-                                    overlay.classList.add('hidden');
-                                    overlay.classList.remove('flex');
-                                    
-                                    // Restore body scroll
-                                    document.body.style.overflow = 'auto';
-                                }
-
-                                // Close popup when clicking outside
-                                document.getElementById('nutrition-overlay').addEventListener('click', function(event) {
-                                    if (event.target === this) {
-                                        closeNutritionPopup();
-                                    }
-                                });
-
-                                // Show nutrition info button when flavor is selected
-                                document.getElementById('flavor').addEventListener('change', function() {
-                                    const nutritionInfoBtn = document.getElementById('nutrition-info-btn');
-                                    nutritionInfoBtn.classList.toggle('hidden', !this.value);
-                                });
-                            </script>
-
-                            <p class="text-sm text-gray-500">Escolha o sabor do seu Whey Protein</p>
-                        </div>
-
-                        <div class="flex items-center text-green-600 mt-2">
-                            <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-2">
-                                <i class="fas fa-box text-green-600"></i>
-                            </div>
-                            <p class="font-medium">9 Unidades em estoque</p>
-                        </div>
-
-                        <!-- Freight Notification -->
-                        <div class="fretefundo">
-                            <img src="//balaoofertas.com/cdn/shop/t/21/assets/correios.png?v=73973234352233545991708550031" 
-                                 width="90" height="35" alt="logo dos correios">
-                            <div>
-                                <p class="ttl-frete">
-                                    <b>Frete Grátis</b> disponível
-                                    <span class="ip-frete" id="custom-address">para <b>São Paulo, SP</b></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Botões de compra -->
-                    <button onclick="startCheckout()" 
-                            class="w-full buy-button py-3 px-6 rounded-lg text-sm font-medium hover:opacity-90 transition flex items-center justify-center mt-4 disabled:opacity-50 disabled:cursor-not-allowed" 
-                            id="buy-now-button" 
-                            disabled>
-                        <i class="fas fa-shopping-cart mr-2"></i>
-                        Comprar agora
-                    </button>
-                    <button onclick="addToCart('Kit Suplementos', 127.90, '')" 
-                            class="w-full btn-primary py-3 px-6 rounded-lg text-sm font-medium hover:bg-opacity-90 transition flex items-center justify-center add-to-cart-btn disabled:opacity-50 disabled:cursor-not-allowed" 
-                            id="add-to-cart-button"
-                            disabled>
-                        <i class="fas fa-cart-plus mr-2"></i>
-                        Adicionar ao carrinho
-                    </button>
-
-                    <script>
-                        // Função para verificar a seleção do sabor e atualizar os botões
-                        document.getElementById('flavor').addEventListener('change', function() {
-                            const buyNowButton = document.getElementById('buy-now-button');
-                            const addToCartButton = document.getElementById('add-to-cart-button');
-                                const fixedBuyButton = document.getElementById('thebutton');
-                            const selectedFlavor = this.value;
-                            const nutritionInfoBtn = document.getElementById('nutrition-info-btn');
-
-                            // Habilita ou desabilita os botões baseado na seleção
-                            buyNowButton.disabled = !selectedFlavor;
-                            addToCartButton.disabled = !selectedFlavor;
-                            fixedBuyButton.disabled = !selectedFlavor;
-                            // Mostra o botão de informação nutricional se um sabor for selecionado
-                            nutritionInfoBtn.classList.toggle('hidden', !selectedFlavor);
-
-                            // Atualiza a função de adicionar ao carrinho com o sabor selecionado
-                            if (selectedFlavor) {
-                                addToCartButton.onclick = function() {
-                                    addToCart('Kit Suplementos - Sabor: ' + 
-                                        document.getElementById('flavor').options[document.getElementById('flavor').selectedIndex].text, 
-                                        127.90, 
-                                        'https://i.ibb.co/99Y6yGHP/imagem-kit-1.webp'
-                                    );
-                                }
-                            }
-                        });
-
-                    </script>
-
-                    <!-- Delivery Estimation Section -->
-                    <div class="mt-6 p-4 bg-gray-50 rounded-lg">
-                        <div class="flex items-center mb-4">
-                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full">
-                                <i class="fas fa-truck text-primary text-xl"></i>
-                            </div>
-                            <h3 class="text-gray-800 font-medium ml-3">Calcular prazo de entrega</h3>
-                        </div>
-                        <div class="flex gap-2">
-                            <div class="flex-1">
-                                <input type="text" 
-                                       id="cep" 
-                                       placeholder="Digite seu CEP" 
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                                       maxlength="9">
-                                <p class="text-xs text-gray-500 mt-1">
-                                    <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" 
-                                       target="_blank" 
-                                       class="text-primary hover:underline">
-                                         Não sei meu CEP
-                                    </a>
-                                </p>
-                            </div>
-                            <button onclick="calculateDelivery()" 
-                                    id="calculate-delivery-btn"
-                                    class="btn-primary px-6 py-2 rounded-lg hover:bg-opacity-90 transition flex items-center justify-center min-w-[120px]">
-                                <span>Calcular</span>
-                                <i class="fas fa-spinner fa-spin ml-2 hidden"></i>
-                            </button>
-                        </div>
-                        <div id="delivery-result" class="mt-3 hidden">
-                            <div class="flex items-center text-green-600">
-                                <i class="fas fa-truck mr-2"></i>
-                                <p class="font-medium">Frete Grátis</p>
-                            </div>
-                            <p class="text-gray-600 text-sm mt-1">
-                                Prazo de entrega: <span id="delivery-address" class="font-medium"></span>
-                            </p>
-                            <p class="text-gray-600 text-sm">
-                                Entrega em 4 a 7 dias úteis
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Garantia Section -->
-                    <div class="mt-4 p-3 bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-100 shadow-sm">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 flex items-center justify-center bg-green-100 rounded-full mr-3">
-                                <i class="fas fa-shield-alt text-green-600 text-lg"></i>
-                            </div>
-                            <div>
-                                <p class="text-gray-800 font-medium text-sm">
-                                    <span class="text-green-600 font-semibold">Garantia de 30 dias</span>
-                                    após a entrega
-                                </p>
-                                <p class="text-gray-600 text-xs mt-0.5">
-                                    Devolução grátis em caso de defeito
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
+            
+            <div class="product-info">
+                <!-- Novos quadrados com ícones -->
+                <div class="flex items-center mb-4 gap-2">
+                    <!-- Quadrado de compartilhar -->
+                    <a href="#" class="w-12 h-12 bg-[#e8f1ff] rounded-md flex items-center justify-center">
+                        <i class="h-icon h-share"></i>
+                    </a>
+                    
+                    <!-- Quadrado de favoritar -->
+                    <a href="#" class="w-12 h-12 bg-[#e8f1ff] rounded-md flex items-center justify-center">
+                        <i class="h-icon h-heart"></i>
+                    </a>
+                    
+                    <!-- Quadrado mais aberto com "Detalhes do produto" -->
+                    <a href="#" class="flex-1 h-12 bg-[#e8f1ff] rounded-md flex items-center px-4">
+                        <i class="h-icon h-list2 mr-2"></i>
+                        <span class="text-[#0C3BDD] font-medium">Detalhes do produto</span>
+                    </a>
+                </div>
+                
+                <!-- Área da toalha de rosto (não totalmente clicável) -->
+                <div class="product-area">
+                    <div class="page-title-wrapper product mb-2">
+                        <h1 class="page-title">
+                            <span class="base font-bold text-lg md:text-2xl" data-ui-id="page-title-wrapper" itemprop="name">Toalha Rosto Madri Havan Casa - Jeans Lavado</span>
+                        </h1>
+                        
+                        <div class="product-reviews-summary empty">
+                            <div class="reviews-actions">
+                                <!-- Apenas este elemento é clicável -->
+                                <a class="action add">
+                                    Seja o primeiro a avaliar este produto            
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="product-info-price">
+                            <div class="price-box price-final_price" data-role="priceBox" data-product-id="679956" data-price-box="product-id-679956">
+                                <!-- Preço antigo acima -->
+                                <div class="old-price mb-0">
+                                    <span class="price-container price-final_price tax weee">
+                                        <span class="price-label"></span>
+                                        <span id="old-price-679956" data-price-amount="24.99" data-price-type="oldPrice" class="price-wrapper text-gray-500 text-xs line-through"><span class="price">R$&nbsp;24,99</span></span>
+                                    </span>
+                                </div>
+                                <!-- Preço atual maior e azul -->
+                                <div class="special-price">
+                                    <span class="price-container price-final_price tax weee" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                                        <span class="price-label sr-only">Preço especial</span>
+                                        <span id="product-price-679956" data-price-amount="14.99" data-price-type="finalPrice" class="price-wrapper"><span class="price text-primary text-3xl font-bold">R$&nbsp;14,99</span></span>
+                                        <meta itemprop="price" content="14.99">
+                                        <meta itemprop="priceCurrency" content="BRL">
+                                    </span>
+                                </div>
+                                
+                                <!-- Opções de parcelamento integradas sem espaçamento -->
+                                <div class="installment-options mt-0">
+                                    <div class="installment-price product-list-price text-sm">
+                                        <span>Em até <span class="installments font-medium">3x</span> de <span class="price font-medium">R$&nbsp;5,00</span> sem juros no cartão de crédito</span>
+                                    </div>
+                                    <div data-bind="scope: 'installments'" class="text-xs text-gray-500 mt-0">
+                                        <!-- ko template: getTemplate() -->
+                                        <a href="#" class="action open-installments hover:text-primary transition-colors text-xs" data-trigger="trigger-installments" data-bind="visible: buttonVisibility">
+                                            <span data-bind="i18n: 'Show installments'">Ver mais opções de parcelamento</span>
+                                        </a>
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+
+                      
+                <div data-bind="scope: 'payment-options'">
+                    <!-- ko template: getTemplate() --><div class="payments-wrapper">
+                    <div class="payments-title">Opções de pagamento:</div>
+                    <div class="payments-list">
+                        <div class="payment pix" data-trigger="trigger-installments"><i class="fa-brands fa-pix"></i><span>Pix</span></div>
+                    </div>
+                </div>
+                <!-- /ko -->
+                </div>
+
+                <div class="shipping-quotation-wrapper margin-effect"><div class="product-estimate-shipping product-shipping">
+                    <form id="shipping-quotation" novalidate="novalidate">
+                        <div class="fieldset">
+                            <div class="field shipping-quotation">
+                                <div class="field shipping-quotation-input">
+                                    <label class="label" for="product-shipping-postcode">
+                                        <span>Calcule o valor do frete e prazo de entrega</span>
+                                    </label>
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        <div class="postcode-input flex-grow" data-bind="scope: 'autoFill'">
+                                            <input type="tel" inputmode="numeric" name="postcode" id="product-shipping-postcode" data-validate="{required:true, 'stripped-min-length': 9}" title="Código Postal" placeholder="Digite o CEP" data-bind="
+                                                    value: CEP,
+                                                    attr: {
+                                                            placeholder: PlaceHolder
+                                                    },
+                                                    mageInit: {
+                                                        'maskInput': {
+                                                            'field': 'postcode'
+                                                        }
+                                                    }
+                                                " maxlength="9">
+                                        </div>
+                                        <div class="actions">
+                                            <button type="submit" id="product-shipping-button" title="Calcular" class="action primary small">
+                                                <span>Calcular</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <span class="cep-search-product">
+                                        <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank" class="text-primary hover:underline">Não sabe seu CEP?</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <p class="delivery-warning">
+                        <i class="fas fa-calendar-alt"></i>
+                        Os prazos de entrega começam a contar a partir da confirmação de pagamento!
+                    </p>
+                    <div class="field shipping-quotation-result" id="shipping-quotation-result"></div>
+                </div>
+
+
+
+                <script type="text/x-magento-template" id="shipping-table">
+                    <div class="shipping-table-wrapper">
+                        <table class="product-shipping-table">
+                            <% if(data.error) { %>
+                            <div> <%= data.error %> </div>
+                            <% } %>
+                            <% var pickup = false %>
+                            <% var shipping = false %>
+                            <% _.each(data.carriers, function(carrier){ %>
+                            <% if (carrier.carrier) { %>
+                            <%= (carrier.carrier == 'pickupstore' && !pickup) ?
+                                '<tr class="carrier-title"><th>Retire em loja</th><th></th></tr>':
+                                '' %>
+                            <% if (carrier.carrier == 'pickupstore' && !pickup) {pickup = true}  %>
+                            <%=
+                            (carrier.carrier != 'pickupstore' && carrier.showTr==1 && !shipping) ?
+                            '<tr class="carrier-title"><th>Entrega</th><th></th></tr>':
+                            ''
+                            %>
+                            <% if (carrier.carrier != 'pickupstore' && !shipping) {shipping = true}  %>
+                                <tr class="carrier-<%= carrier.carrier %>">
+                                    <td class="method-title">
+                                        <div>
+                                            <div class="description">
+                                                <% if(carrier.carrier == 'pickupstore') { %>
+                                                    <% if(carrier.method_title == 'Não disponível') { %>
+                                                        <p class="error-message">Não disponível</p>
+                                                    <% } else { %>
+                                                        <p class="highlight">
+                                                            <% if (carrier.code != "pickupstore_error") { %>
+                                                                <b><%= carrier.carrier_title %></b>
+                                                                <p>Retirar na loja <b>R$0,00</b></p>
+                                                            <% } else { %>
+                                                                <p class="error-message">
+                                                                    <%= carrier.error_message %>
+                                                                </p>
+                                                            <% } %>
+                                                        </p>
+                                                    <% } %>
+
+                                                <% } else { %>
+                                                    <% if(carrier.method_title) { %>
+                                                        <p class="highlight"><b><%= carrier.carrier_title %></b></p>
+                                                        <p>
+                                                            <%= carrier.method_title %>
+                                                            <b><%= carrier.price %></b>
+                                                        </p>
+                                                    <% } else { %>
+                                                        <p class="error-message"><%= carrier.error_message %></p>
+                                                    <% } %>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }}) %>
+                            <tr class="warning-message" style="display: none">
+                                <td>
+                                    <p>
+                                        A retirada em loja está disponível apenas para compras realizadas por pessoas físicas (CPF),
+                                        enquanto a modalidade pessoa jurídica (CNPJ) não é elegível para essa opção.
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </script>
+                <button id="btn-readmore" style="display: none">Ver mais</button>
+
+                <script type="text/x-magento-template" id="loading-state">
+                    <div class=calculating>
+                        <img class="notlazy" src="https://www.havan.com.br/static/version1739247337/frontend/Havan/Mobile/pt_BR/images/loader-1.gif"
+                            alt="Loading">
+                    </div>
+
+
+                </script>
+                <script type="text/javascript">
+                    window.havanData = {
+                        config: {
+                            autoRating: !!(0),
+                            blockPickupCnpj: !!(1),
+                            customerType: 'guest',
+                            isProductConfigurable: !!(0)
+                        }
+                    };
+                </script>
+                </div>
 
             <div class="mt-12">
                 <div class="bg-white rounded-lg shadow-sm p-6">
@@ -1254,39 +1438,65 @@
     <script>
     // Adiciona após os scripts existentes
     document.addEventListener('DOMContentLoaded', function() {
-        const mainImage = document.querySelector('.main-product-image');
-        const thumbnails = document.querySelectorAll('.product-thumbnail');
-        const thumbnailsContainer = document.querySelector('.thumbnails-container');
+        const mainImage = document.getElementById('mainProductImage');
+        const thumbnails = Array.from(document.querySelectorAll('.product-thumbnail'));
         const prevButton = document.getElementById('prevImage');
         const nextButton = document.getElementById('nextImage');
-        letcurrentIndex = 0;
-
-        // Função para centralizar a thumbnail no container
-        function centerThumbnail(thumbnail) {
-                        const containerWidth = thumbnailsContainer.offsetWidth;
-            const thumbnailWidth = thumbnail.offsetWidth;
-            const scrollLeft = thumbnail.offsetLeft - (containerWidth / 2) + (thumbnailWidth /2);
-            thumbnailsContainer.scrollTo({
-                left: scrollLeft,
-                behavior: 'smooth'
-            });
-        }
-
-        // Função para atualizar a imagem principal e a thumbnail ativa
-        function updateImage(index) {
-            mainImage.src = thumbnails[index].src;
-            thumbnails.forEach(thumb => thumb.classList.remove('active'));
-            thumbnails[index].classList.add('active');
-            currentIndex = index;
-            centerThumbnail(thumbnails[index]);
-        }
-
-        // Event listeners para as thumbnails
-        thumbnails.forEach((thumbnail, index) => {
-            thumbnail.addEventListener('click', () => {
+        const dotsContainer = document.getElementById('dotsContainer');
+        
+        let currentIndex = 0;
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+        
+        // Criar traços de navegação no estilo Havan
+        thumbnails.forEach((_, index) => {
+            // Criar o frame do traço
+            const navFrame = document.createElement('div');
+            navFrame.classList.add('fotorama__nav__frame', 'fotorama__nav__frame--dot');
+            navFrame.setAttribute('tabindex', '0');
+            navFrame.setAttribute('role', 'button');
+            navFrame.setAttribute('data-gallery-role', 'nav-frame');
+            navFrame.setAttribute('data-nav-type', 'thumb');
+            navFrame.setAttribute('aria-label', `Imagem ${index + 1}`);
+            navFrame.setAttribute('data-active', index === 0 ? 'true' : 'false');
+            
+            if (index === 0) {
+                navFrame.classList.add('fotorama__active');
+            }
+            
+            // Criar o traço dentro do frame
+            const dot = document.createElement('div');
+            dot.classList.add('fotorama__dot');
+            
+            // Adicionar evento de clique
+            navFrame.addEventListener('click', () => {
                 updateImage(index);
             });
+            
+            // Montar a estrutura
+            navFrame.appendChild(dot);
+            dotsContainer.appendChild(navFrame);
         });
+
+        // Função para atualizar a imagem principal e os traços de navegação
+        function updateImage(index) {
+            mainImage.src = thumbnails[index].src;
+            
+            // Atualizar traços de navegação
+            const navFrames = Array.from(dotsContainer.querySelectorAll('.fotorama__nav__frame'));
+            navFrames.forEach((frame, i) => {
+                if (i === index) {
+                    frame.classList.add('fotorama__active');
+                    frame.setAttribute('data-active', 'true');
+                } else {
+                    frame.classList.remove('fotorama__active');
+                    frame.setAttribute('data-active', 'false');
+                }
+            });
+            
+            currentIndex = index;
+        }
 
         // Event listeners para os botões de navegação
         prevButton.addEventListener('click', () => {
@@ -1298,8 +1508,108 @@
             const newIndex = currentIndex < thumbnails.length - 1 ? currentIndex + 1 : 0;
             updateImage(newIndex);
         });
-
-        // Inicializar com a primeira imagem
+        
+        // Adicionar suporte para arrastar (swipe)
+        const imageContainer = document.querySelector('.main-image-container');
+        
+        // Touch events para dispositivos móveis
+        imageContainer.addEventListener('touchstart', handleTouchStart, false);
+        imageContainer.addEventListener('touchmove', handleTouchMove, false);
+        imageContainer.addEventListener('touchend', handleTouchEnd, false);
+        
+        // Mouse events para desktop
+        imageContainer.addEventListener('mousedown', handleMouseDown, false);
+        document.addEventListener('mousemove', handleMouseMove, false);
+        document.addEventListener('mouseup', handleMouseUp, false);
+        
+        function handleTouchStart(e) {
+            startX = e.touches[0].clientX;
+        }
+        
+        function handleTouchMove(e) {
+            if (!startX) return;
+            currentX = e.touches[0].clientX;
+            const diffX = startX - currentX;
+            
+            // Prevenir scroll vertical durante o swipe horizontal
+            if (Math.abs(diffX) > 10) {
+                e.preventDefault();
+            }
+        }
+        
+        function handleTouchEnd(e) {
+            if (!startX || !currentX) return;
+            
+            const diffX = startX - currentX;
+            const threshold = 50; // Mínimo de pixels para considerar um swipe
+            
+            if (Math.abs(diffX) > threshold) {
+                if (diffX > 0) {
+                    // Swipe para a esquerda - próxima imagem
+                    const newIndex = currentIndex < thumbnails.length - 1 ? currentIndex + 1 : 0;
+                    updateImage(newIndex);
+                } else {
+                    // Swipe para a direita - imagem anterior
+                    const newIndex = currentIndex > 0 ? currentIndex - 1 : thumbnails.length - 1;
+                    updateImage(newIndex);
+                }
+            }
+            
+            startX = null;
+            currentX = null;
+        }
+        
+        function handleMouseDown(e) {
+            e.preventDefault();
+            isDragging = true;
+            startX = e.clientX;
+            imageContainer.style.cursor = 'grabbing';
+        }
+        
+        function handleMouseMove(e) {
+            if (!isDragging) return;
+            currentX = e.clientX;
+        }
+        
+        function handleMouseUp(e) {
+            if (!isDragging) return;
+            
+            if (currentX) {
+                const diffX = startX - currentX;
+                const threshold = 50;
+                
+                if (Math.abs(diffX) > threshold) {
+                    if (diffX > 0) {
+                        // Swipe para a esquerda - próxima imagem
+                        const newIndex = currentIndex < thumbnails.length - 1 ? currentIndex + 1 : 0;
+                        updateImage(newIndex);
+                    } else {
+                        // Swipe para a direita - imagem anterior
+                        const newIndex = currentIndex > 0 ? currentIndex - 1 : thumbnails.length - 1;
+                        updateImage(newIndex);
+                    }
+                }
+            }
+            
+            isDragging = false;
+            imageContainer.style.cursor = 'grab';
+        }
+        
+        // Inicializar o cursor como grab
+        imageContainer.style.cursor = 'grab';
+        
+        // Adicionar navegação com teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                const newIndex = currentIndex > 0 ? currentIndex - 1 : thumbnails.length - 1;
+                updateImage(newIndex);
+            } else if (e.key === 'ArrowRight') {
+                const newIndex = currentIndex < thumbnails.length - 1 ? currentIndex + 1 : 0;
+                updateImage(newIndex);
+            }
+        });
+        
+        // Inicializar a primeira imagem
         updateImage(0);
     });
 </script>
@@ -1423,8 +1733,6 @@
         </div>
     </div>
 </div>
-</body>
-</html>
 
 <script>
     // Nutritional information data for each flavor
@@ -1657,6 +1965,51 @@
             <img class="max-h-[21px]"  src="https://www.gsuplementos.com.br/tema/growth/img/rodape/icones/logo-deluca.svg"/>
         </div>
     </div>
-</footer>
+
+    <!-- Search Overlay -->
+    <div id="search-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-start justify-center pt-20">
+        <div class="bg-white p-4 rounded-lg shadow-lg w-full max-w-2xl mx-4">
+            <div class="flex items-center mb-4">
+                <form role="search" method="get" class="search-form w-full">
+                    <div class="relative">
+                        <input type="search" class="w-full p-3 pl-10 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="O que você está procurando?" name="s">
+                        <i class="h-icon h-search absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+                        <button type="submit" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-primary">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+                <button onclick="closeSearchbar()" class="ml-4 text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Existing functions
+        // ... existing code ...
+        
+        // Search functions
+        function openSearchbar() {
+            document.getElementById('search-overlay').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                document.querySelector('#search-overlay input[type="search"]').focus();
+            }, 100);
+        }
+        
+        function closeSearchbar() {
+            document.getElementById('search-overlay').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        
+        // Close search overlay when clicking outside
+        document.getElementById('search-overlay').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeSearchbar();
+            }
+        });
+    </script>
 </body>
 </html>

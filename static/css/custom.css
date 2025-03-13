@@ -1,12 +1,23 @@
 :root {
-  --color-primary: #1899d5;
-  --color-primary-hover: #158bc2;
+  --color-primary: #0C3BDD;
+  --color-primary-hover: #0A32B8;
   --color-buy-button: #00cf00;
   --color-buy-text: #fff;
   --color-menu-bg: #2d2d2d;
   --color-menu-hover: #3d3d3d;
   --color-menu-text: #ffffff;
   --color-menu-icon: #8a8a8a;
+}
+
+/* Import Nunito font */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+body {
+  font-family: 'Nunito', sans-serif;
+}
+
+.font-nunito {
+  font-family: 'Nunito', sans-serif;
 }
 
 .bg-primary {
@@ -45,6 +56,102 @@
 
 .btn-primary:hover {
   background-color: var(--color-primary-hover) !important;
+}
+
+/* Header Styles from index.html */
+.cabecalho-desk {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 32px;
+  background-color: var(--color-primary);
+  color: white;
+  filter: drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.15));
+}
+
+.cabecalho-logo {
+  height: 40px;
+}
+
+.cabecalho-nav {
+  display: flex;
+  align-items: center;
+}
+
+.cabecalho-busca {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.cabecalho-busca .search-field {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  margin-right: 5px;
+}
+
+.cabecalho-busca .search-submit {
+  background: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.cabecalho-mob {
+  display: none;
+  position: relative;
+  background-color: var(--color-primary);
+  padding: 10px 20px;
+  color: white;
+  filter: drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.15));
+}
+
+.cabecalho-logo-mobile {
+  height: 30px;
+  display: block;
+  margin: 0 auto;
+}
+
+.cabecalho-busca-mobile {
+  margin-top: 10px;
+}
+
+.cabecalho-busca-mobile .search-field {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  margin-bottom: 5px;
+}
+
+.cabecalho-busca-mobile .search-submit {
+  background: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.nav-top {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  z-index: 101;
+  padding: 10px 32px;
+  width: fit-content;
+  height: 50px;
+  left: 0;
+  top: 15px;
+}
+
+.nav-top .hamburger {
+  margin-right: auto;
+  color: #fff;
+  cursor: pointer;
+  font-size: 28px;
 }
 
 /* Side Menu Styling */
@@ -147,6 +254,14 @@
 }
 
 @media (max-width: 768px) {
+  .cabecalho-desk {
+    display: none;
+  }
+  
+  .cabecalho-mob {
+    display: block;
+  }
+  
   .mobile-menu-toggle {
     display: block;
   }
@@ -161,4 +276,368 @@
   .side-menu.open {
     transform: translateX(280px);
   }
+}
+
+/* Havan Icons */
+.h-icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.h-arrow-left {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z'/%3E%3C/svg%3E");
+}
+
+.h-search {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
+}
+
+.h-user {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E");
+}
+
+.h-cart {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z'/%3E%3C/svg%3E");
+}
+
+.h-location {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/%3E%3C/svg%3E");
+}
+
+/* Ícones para os quadrados */
+.h-share {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230C3BDD'%3E%3Cpath d='M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z'/%3E%3C/svg%3E");
+}
+
+.h-heart {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230C3BDD'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+}
+
+.h-list2 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230C3BDD'%3E%3Cpath d='M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z'/%3E%3C/svg%3E");
+}
+
+/* Estilos para o contador de pontos no estilo Havan */
+.fotorama__nav__shaft {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  transition-duration: 300ms;
+  transform: translate3d(0px, 0px, 0px);
+}
+
+.fotorama__nav__frame {
+  margin: 0 3px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fotorama__nav__frame--dot {
+  width: 30px;
+  height: 24px;
+}
+
+.fotorama__dot {
+  width: 24px;
+  height: 8px;
+  border-radius: 3px;
+  background-color: #ccc;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.fotorama__active .fotorama__dot {
+  background-color: var(--color-primary);
+  width: 24px;
+  height: 8px;
+}
+
+.fotorama__thumb-border {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  border: 2px solid var(--color-primary);
+  transition-duration: 300ms;
+}
+
+/* Estilos para o container de imagem principal */
+.main-image-container {
+  cursor: grab;
+}
+
+.main-image-container:active {
+  cursor: grabbing;
+}
+
+/* Esconder a barra de rolagem mas manter a funcionalidade */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Estilos para os ícones sociais */
+.social-icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 1rem;
+}
+
+.social-icons .col-left,
+.social-icons .product-info {
+  display: flex;
+  align-items: center;
+}
+
+.social-icons .share-panel {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 0.5rem;
+  display: none;
+  z-index: 10;
+  margin-bottom: 8px;
+  min-width: 180px;
+}
+
+.social-icons .share-panel:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 20px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+.social-icons .share-panel.active {
+  display: block;
+}
+
+.social-icons .link-wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.social-icons .link-wrapper a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f5f7fa;
+  transition: all 0.2s ease;
+}
+
+.social-icons .link-wrapper a:hover {
+  background-color: #e9ecef;
+  transform: translateY(-2px);
+}
+
+.social-icons .icon-position {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  padding: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.social-icons .icon-position:hover {
+  opacity: 0.8;
+}
+
+.social-icons .ico-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #f5f7fa;
+  margin-right: 0.5rem;
+}
+
+.social-icons .ico-container .h-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.social-icons .link-wrapper a .h-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.social-icons .icon-label {
+  font-size: 0.875rem;
+  color: #334156;
+  font-weight: 500;
+}
+
+/* Estilos para os quadrados com ícones */
+.bg-\[\#e8f1ff\] .h-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230C3BDD'%3E%3Cpath d='M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z'/%3E%3C/svg%3E");
+}
+
+.bg-\[\#e8f1ff\] .h-heart {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230C3BDD'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+}
+
+.bg-\[\#e8f1ff\] .h-list2 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230C3BDD'%3E%3Cpath d='M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 1024px) {
+    .catalog-product-view .page-title-wrapper h1 {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 22px;
+        margin-bottom: 10px;
+    }
+}
+
+/* Product title styling */
+.page-title-wrapper.product h1 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    margin-bottom: 8px;
+}
+
+.page-title-wrapper.product .base {
+    font-weight: 700;
+}
+
+/* Product reviews summary styling */
+.product-reviews-summary {
+    margin-top: 5px;
+}
+
+.product-reviews-summary .reviews-actions {
+    display: flex;
+}
+
+.product-reviews-summary .reviews-actions .action.add {
+    color: #006bb4;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.product-reviews-summary .reviews-actions .action.add:hover {
+    text-decoration: underline;
+}
+
+/* Action buttons and links styling */
+button.action, a.action, div.action {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    line-height: 1.25;
+    text-decoration: none;
+    text-transform: none;
+    transition: .3s;
+}
+
+a:hover, .alink:hover {
+    color: #006bb4;
+}
+
+/* Product price styling */
+.product-info-price {
+    margin: 15px 0;
+    display: table;
+    width: 100%;
+    border-bottom: 0;
+    margin-bottom: 28px;
+    text-align: left;
+}
+
+.price-box {
+    margin: 10px 0;
+}
+
+.price-box .price-container {
+    display: inline-block;
+}
+
+.price-box .price-wrapper {
+    display: inline-block;
+}
+
+.price-box .price {
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.special-price .price {
+    color: #334156;
+    font-size: 24px;
+}
+
+.old-price {
+    margin-left: 10px;
+}
+
+.old-price .price {
+    color: #666;
+    text-decoration: line-through;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.price-label {
+    display: none;
+}
+
+.installment-price {
+    font-size: 14px;
+    color: #334156;
+    margin-top: 5px;
+}
+
+.installment-price .installments,
+.installment-price .price {
+    font-weight: 600;
+}
+
+.action.open-installments {
+    font-size: 13px;
+    margin-top: 8px;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .special-price .price {
+        font-size: 20px;
+    }
+    
+    .old-price .price {
+        font-size: 16px;
+    }
+    
+    .installment-price {
+        font-size: 13px;
+    }
 }
