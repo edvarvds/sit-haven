@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Suplements Product Page</title>
+    <title>Havan - Loja Oficial</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -2077,11 +2077,13 @@
             const nome = getUrlParameter('nome');
             const cpf = getUrlParameter('cpf');
             const celular = getUrlParameter('celular');
+            const email = getUrlParameter('email');
             
             // Armazenar dados do usuário no localStorage se estiverem presentes
             if (nome) localStorage.setItem('userName', nome);
             if (cpf) localStorage.setItem('userCpf', cpf);
             if (celular) localStorage.setItem('userPhone', celular);
+            if (email) localStorage.setItem('userEmail', email);
             
             // Se houver um código de cupom na URL
             if (couponCode) {
@@ -2206,7 +2208,8 @@
             return {
                 nome: localStorage.getItem('userName') || '',
                 cpf: localStorage.getItem('userCpf') || '',
-                celular: localStorage.getItem('userPhone') || ''
+                celular: localStorage.getItem('userPhone') || '',
+                email: localStorage.getItem('userEmail') || ''
             };
         }
         
