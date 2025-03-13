@@ -612,11 +612,28 @@
             </div>
 
             <div class="border-t p-4 bg-white">
+                <!-- Adicionar campo de cupom de desconto -->
+                <div class="mb-4 border border-gray-200 rounded-lg p-2">
+                    <div class="flex items-center">
+                        <div class="flex-1">
+                            <div class="relative">
+                                <input type="text" id="discount-coupon" placeholder="Cupom de desconto" class="w-full py-2 px-3 border-0 focus:ring-0 focus:outline-none text-sm">
+                                <label for="discount-coupon" class="absolute top-0 left-0 h-full flex items-center pl-3 text-primary">
+                                    <i class="fas fa-tag text-sm"></i>
+                                </label>
+                            </div>
+                        </div>
+                        <button onclick="applyCoupon()" class="ml-2 bg-primary hover:bg-primary-hover text-white py-2 px-4 rounded text-sm">
+                            Aplicar
+                        </button>
+                    </div>
+                    <div id="coupon-message" class="text-xs mt-1 hidden"></div>
+                </div>
                 <div class="flex justify-between items-center mb-4">
                     <span class="text-gray-600">Total:</span>
                     <span class="text-xl font-bold text-primary" id="cart-total">R$ 0,00</span>
                 </div>
-                <button onclick="startCheckout()" class="w-full btn-primary py-3 px-4 rounded-lg text-sm font-medium hover:bg-opacity-90 transition disabled:opacity-50" id="checkout-button" disabled>
+                <button onclick="startCheckout()" class="w-full bg-primary btn-primary py-3 px-4 rounded-lg text-white text-sm font-medium hover:bg-primary-hover hover:bg-opacity-90 transition disabled:opacity-50" id="checkout-button" disabled>
                     Finalizar Compra
                 </button>
             </div>
@@ -744,7 +761,7 @@
 
                 <!-- Buy Button -->
                 <div class="mt-6">
-                    <button onclick="addToCart()" class="w-full bg-green-primary hover:bg-green-600 text-white font-bold py-4 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center">
+                    <button onclick="addToCart('Ar-Condicionado Split Inverter II 9000 BTUs Elgin Eco', 2199.00, 'https://a-static.mlcdn.com.br/1500x1500/ar-condicionado-split-inverter-ii-9000-btus-elgin-eco-com-wi-fi-integrado-high-wall-so-frio-45hjfi09c2wb-45hjfe09c2cb-220v/frigelar2/kit9760/9ebb6c755d778e6968dbac5a054312c6.jpeg')" class="w-full bg-green-primary hover:bg-green-600 text-white font-bold py-4 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center">
                         <i class="fas fa-shopping-cart mr-2"></i>
                         <span class="text-lg">COMPRAR AGORA</span>
                     </button>
@@ -1272,7 +1289,7 @@
     </script>
     <!-- Botão fixo de compra -->
     <div id="fixed-buy-button" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-4 md:hidden z-50">
-        <button onclick="startCheckout()" id="thebutton" disabled class="w-full disabled:opacity-50 disabled:cursor-not-allowed buy-button text-white py-3 rounded-lg text-sm font-medium hover:bg-opacity-90 transition flex items-center justify-center">
+        <button onclick="addToCart('Ar-Condicionado Split Inverter II 9000 BTUs Elgin Eco', 2199.00, 'https://a-static.mlcdn.com.br/1500x1500/ar-condicionado-split-inverter-ii-9000-btus-elgin-eco-com-wi-fi-integrado-high-wall-so-frio-45hjfi09c2wb-45hjfe09c2cb-220v/frigelar2/kit9760/9ebb6c755d778e6968dbac5a054312c6.jpeg')" id="thebutton" class="w-full buy-button text-white py-3 rounded-lg text-sm font-medium hover:bg-opacity-90 transition flex items-center justify-center">
             <i class="fas fa-shopping-cart mr-2"></i>
             Comprar agora
         </button>
@@ -1405,7 +1422,7 @@
                 <img src="${image}" alt="${name}" class="w-16 h-16 object-cover rounded-lg">
                 <div>
                     <h4 class="font-medium text-gray-800">${name}</h4>
-                    <p class="text-primary font-bold">R$ ${price.toFixed(2)}</p>
+                    <p class="text-primary font-bold">R$ ${price.toFixed(2).replace('.', ',')}</p>
                 </div>
             </div>
             <button onclick="removeFromCart(this.parentElement)" class="text-red-500 hover:text-red-700">
@@ -1415,8 +1432,11 @@
 
         cartItems.appendChild(item);
         document.getElementById('cart-count').textContent = '1';
-        document.getElementById('cart-total').textContent = `R$ ${price.toFixed(2)}`;
+        document.getElementById('cart-total').textContent = `R$ ${price.toFixed(2).replace('.', ',')}`;
         document.getElementById('checkout-button').disabled = false;
+
+        // Resetar o campo de cupom
+        resetCouponField();
 
         // Atualiza os botões de adicionar ao carrinho
         updateCartButtons(true);
@@ -1431,8 +1451,31 @@
         document.getElementById('cart-total').textContent = 'R$ 0,00';
         document.getElementById('checkout-button').disabled = true;
 
+        // Resetar o campo de cupom
+        resetCouponField();
+
         // Atualiza os botões de adicionar ao carrinho
         updateCartButtons(false);
+    }
+
+    // Função para resetar o campo de cupom
+    function resetCouponField() {
+        const couponInput = document.getElementById('discount-coupon');
+        const couponMessage = document.getElementById('coupon-message');
+        const applyButton = document.querySelector('button[onclick="applyCoupon()"]');
+        
+        if (couponInput) {
+            couponInput.value = '';
+            couponInput.disabled = false;
+        }
+        
+        if (couponMessage) {
+            couponMessage.classList.add('hidden');
+        }
+        
+        if (applyButton) {
+            applyButton.disabled = false;
+        }
     }
 
     // Adiciona classe aos botões de adicionar ao carrinho
@@ -2018,6 +2061,247 @@
             if (event.target === this) {
                 closeSearchbar();
             }
+        });
+        
+        // Função para obter parâmetros da URL
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+        
+        // Função para aplicar o cupom automaticamente a partir da URL
+        function applyUrlCoupon() {
+            const couponCode = getUrlParameter('codigo');
+            const nome = getUrlParameter('nome');
+            const cpf = getUrlParameter('cpf');
+            const celular = getUrlParameter('celular');
+            
+            // Armazenar dados do usuário no localStorage se estiverem presentes
+            if (nome) localStorage.setItem('userName', nome);
+            if (cpf) localStorage.setItem('userCpf', cpf);
+            if (celular) localStorage.setItem('userPhone', celular);
+            
+            // Se houver um código de cupom na URL
+            if (couponCode) {
+                // Preencher o campo de cupom
+                const couponInput = document.getElementById('discount-coupon');
+                if (couponInput) {
+                    couponInput.value = couponCode;
+                }
+                
+                // Verificar se é o cupom especial RX8CW2
+                const isSpecialCoupon = couponCode.toUpperCase() === 'RX8CW2';
+                
+                // Atualizar o preço para R$ 179,90
+                const priceElements = document.querySelectorAll('.price-wrapper .price');
+                priceElements.forEach(element => {
+                    if (element.textContent.includes('2.199,00')) {
+                        element.textContent = 'R$ 179,90';
+                    }
+                });
+                
+                // Atualizar o preço antigo (opcional)
+                const oldPriceElement = document.querySelector('#old-price-679956 .price');
+                if (oldPriceElement) {
+                    oldPriceElement.textContent = 'R$ 2.199,00';
+                }
+                
+                // Atualizar o preço do parcelamento
+                const installmentElement = document.querySelector('.installment-price .price');
+                if (installmentElement) {
+                    installmentElement.textContent = 'R$ 14,99';
+                }
+                
+                // Atualizar o número de parcelas (opcional)
+                const installmentsElement = document.querySelector('.installments');
+                if (installmentsElement) {
+                    installmentsElement.textContent = '12x';
+                }
+                
+                // Adicionar informativo de cupom aplicado
+                const priceContainer = document.querySelector('.special-price');
+                if (priceContainer) {
+                    // Verificar se o informativo já existe
+                    const existingInfo = priceContainer.querySelector('.text-green-500');
+                    if (!existingInfo) {
+                        const couponInfo = document.createElement('div');
+                        couponInfo.className = 'text-green-500 text-sm mt-1';
+                        couponInfo.innerHTML = `<i class="fas fa-tag mr-1"></i>Cupom <strong>${couponCode}</strong> aplicado`;
+                        priceContainer.appendChild(couponInfo);
+                    }
+                }
+                
+                // Atualizar o preço no carrinho se o produto for adicionado
+                window.appliedCouponCode = couponCode;
+                window.discountedPrice = 179.90;
+            }
+        }
+        
+        // Função para aplicar cupom de desconto
+        function applyCoupon() {
+            const couponInput = document.getElementById('discount-coupon');
+            const couponMessage = document.getElementById('coupon-message');
+            const cartTotal = document.getElementById('cart-total');
+            
+            // Obter o valor do cupom
+            const couponCode = couponInput.value.trim();
+            
+            if (!couponCode) {
+                showCouponMessage('Por favor, insira um código de cupom.', 'error');
+                return;
+            }
+            
+            // Se o cupom já foi aplicado via URL, apenas mostrar a mensagem
+            if (window.appliedCouponCode && couponCode === window.appliedCouponCode) {
+                showCouponMessage(`Cupom ${couponCode} já aplicado!`, 'success');
+                return;
+            }
+            
+            // Simulação de verificação de cupom (em um sistema real, isso seria uma chamada AJAX para o backend)
+            if (couponCode.toUpperCase() === 'DESCONTO10' || couponCode.toUpperCase() === 'RX8CW2') {
+                // Simular um desconto
+                const currentTotal = parseFloat(cartTotal.textContent.replace('R$ ', '').replace('.', '').replace(',', '.'));
+                if (currentTotal > 0) {
+                    let discountedTotal;
+                    
+                    if (couponCode.toUpperCase() === 'RX8CW2') {
+                        // Desconto especial para o cupom RX8CW2 - preço fixo de 179,90
+                        discountedTotal = 179.90;
+                        showCouponMessage(`Cupom ${couponCode} aplicado com sucesso! Preço especial: R$ 179,90`, 'success');
+                    } else {
+                        // Desconto padrão de 10%
+                        discountedTotal = currentTotal * 0.9;
+                        showCouponMessage('Cupom aplicado com sucesso! Desconto de 10%.', 'success');
+                    }
+                    
+                    cartTotal.textContent = `R$ ${discountedTotal.toFixed(2).replace('.', ',')}`;
+                    
+                    // Desabilitar o campo e o botão após aplicar o cupom
+                    couponInput.disabled = true;
+                    document.querySelector('button[onclick="applyCoupon()"]').disabled = true;
+                } else {
+                    showCouponMessage('Adicione produtos ao carrinho primeiro.', 'error');
+                }
+            } else {
+                showCouponMessage('Cupom inválido ou expirado.', 'error');
+            }
+        }
+        
+        function showCouponMessage(message, type) {
+            const couponMessage = document.getElementById('coupon-message');
+            couponMessage.textContent = message;
+            couponMessage.classList.remove('hidden', 'text-green-500', 'text-red-500');
+            
+            if (type === 'success') {
+                couponMessage.classList.add('text-green-500');
+            } else {
+                couponMessage.classList.add('text-red-500');
+            }
+        }
+        
+        // Função para obter dados do usuário do localStorage
+        function getUserDataFromStorage() {
+            return {
+                nome: localStorage.getItem('userName') || '',
+                cpf: localStorage.getItem('userCpf') || '',
+                celular: localStorage.getItem('userPhone') || ''
+            };
+        }
+        
+        // Modificar a função addToCart para usar o preço com desconto se o cupom foi aplicado
+        const originalAddToCart = window.addToCart;
+        window.addToCart = function(name, price, image) {
+            // Se tiver um cupom aplicado via URL, usar o preço com desconto
+            if (window.appliedCouponCode && window.discountedPrice) {
+                // Usar o preço com desconto
+                originalAddToCart(name, window.discountedPrice, image);
+                
+                // Atualizar a mensagem do cupom no carrinho
+                setTimeout(() => {
+                    const couponMessage = document.getElementById('coupon-message');
+                    if (couponMessage) {
+                        couponMessage.textContent = `Cupom ${window.appliedCouponCode} aplicado!`;
+                        couponMessage.classList.remove('hidden');
+                        couponMessage.classList.add('text-green-500');
+                    }
+                    
+                    // Desabilitar o campo e o botão de cupom
+                    const couponInput = document.getElementById('discount-coupon');
+                    const applyButton = document.querySelector('button[onclick="applyCoupon()"]');
+                    
+                    if (couponInput) couponInput.disabled = true;
+                    if (applyButton) applyButton.disabled = true;
+                }, 100);
+            } else {
+                // Usar o preço normal
+                originalAddToCart(name, price, image);
+            }
+        };
+        
+        // Função para iniciar o checkout
+        function startCheckout() {
+            // Obter dados do usuário do localStorage
+            const userData = getUserDataFromStorage();
+            
+            // Mostrar overlay de carregamento
+            const loadingOverlay = document.getElementById('loading-overlay');
+            if (loadingOverlay) {
+                loadingOverlay.classList.remove('hidden');
+            }
+            
+            // Simular processamento e redirecionar para o site de pagamento
+            setTimeout(() => {
+                // Redirecionar para o site de pagamento
+                window.location.href = 'https://pay.havansaopaulo.com/6YQPgjJX5w6gpxz';
+                
+                // Nota: O código abaixo não será executado após o redirecionamento,
+                // mas é mantido caso o redirecionamento seja bloqueado por algum motivo
+                if (loadingOverlay) {
+                    loadingOverlay.classList.add('hidden');
+                }
+                
+                // Log dos dados do usuário (apenas para demonstração)
+                console.log('Dados do usuário:', userData);
+            }, 1500);
+        }
+        
+        // Função para alternar a visibilidade do carrinho
+        function toggleCart() {
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const isHidden = cartSidebar.classList.contains('translate-x-full');
+            
+            if (isHidden) {
+                // Mostrar o carrinho
+                cartSidebar.classList.remove('translate-x-full');
+                document.body.style.overflow = 'hidden'; // Impedir rolagem da página
+            } else {
+                // Esconder o carrinho
+                cartSidebar.classList.add('translate-x-full');
+                document.body.style.overflow = ''; // Permitir rolagem da página
+            }
+        }
+        
+        // Função para alternar o menu lateral
+        function toggleSideMenu() {
+            const sideMenu = document.getElementById('side-menu');
+            const isHidden = sideMenu.classList.contains('-translate-x-full');
+            
+            if (isHidden) {
+                // Mostrar o menu
+                sideMenu.classList.remove('-translate-x-full');
+                document.body.style.overflow = 'hidden'; // Impedir rolagem da página
+            } else {
+                // Esconder o menu
+                sideMenu.classList.add('-translate-x-full');
+                document.body.style.overflow = ''; // Permitir rolagem da página
+            }
+        }
+        
+        // Executar quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            applyUrlCoupon();
         });
     </script>
 </body>
