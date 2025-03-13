@@ -1158,12 +1158,17 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('click', function(e) {
     const sideMenu = document.getElementById('side-menu');
     const cartSidebar = document.getElementById('cart-sidebar');
+    const cartToggleButtons = document.querySelectorAll('.cart-toggle-btn');
 
-    if (!e.target.closest('#side-menu') && !e.target.closest('button')) {
+    // Verifica se o clique foi no menu lateral ou em um botão que não seja de toggle do carrinho
+    if (!e.target.closest('#side-menu') && !e.target.closest('.side-menu-toggle')) {
         sideMenu.classList.add('-translate-x-full');
     }
 
-    if (!e.target.closest('#cart-sidebar') && !e.target.closest('button')) {
+    // Verifica se o clique foi fora do carrinho e não foi em um botão de toggle do carrinho
+    if (!e.target.closest('#cart-sidebar') && 
+        !e.target.closest('.cart-toggle-btn') && 
+        !e.target.closest('.add-to-cart-btn')) {
         cartSidebar.classList.add('translate-x-full');
     }
 });

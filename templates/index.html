@@ -439,13 +439,13 @@
                     </button>
                     
                     <nav aria-label="Navegação do usuário" class="navigation-my-account ml-3">
-                        <button type="button" id="sidebar-collapse-button" aria-label="Botão Minha Conta" class="text-white focus:outline-none" onclick="toggleSideMenu()">
+                        <button type="button" id="sidebar-collapse-button" aria-label="Botão Minha Conta" class="text-white focus:outline-none side-menu-toggle" onclick="toggleSideMenu()">
                             <i class="h-icon h-user"></i>
                         </button>
                     </nav>
                     
                     <div class="minicart-wrapper ml-3">
-                        <a class="action showcart text-white focus:outline-none hover:text-gray-200 transition relative" href="#" onclick="toggleCart()">
+                        <a class="action showcart text-white focus:outline-none hover:text-gray-200 transition relative cart-toggle-btn" href="#" onclick="toggleCart()">
                             <i class="h-icon h-cart icon-minicart"></i>
                             <div class="minicart-ellipse">
                                 <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center" id="cart-count">0</span>
@@ -601,7 +601,7 @@
             <div class="p-4 border-b">
                 <div class="flex justify-between items-center">
                     <h3 class="text-lg font-semibold">Carrinho</h3>
-                    <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-700">
+                    <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-700 cart-toggle-btn">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
@@ -761,7 +761,7 @@
 
                 <!-- Buy Button -->
                 <div class="mt-6">
-                    <button onclick="addToCart('Ar-Condicionado Split Inverter II 9000 BTUs Elgin Eco', 2199.00, 'https://a-static.mlcdn.com.br/1500x1500/ar-condicionado-split-inverter-ii-9000-btus-elgin-eco-com-wi-fi-integrado-high-wall-so-frio-45hjfi09c2wb-45hjfe09c2cb-220v/frigelar2/kit9760/9ebb6c755d778e6968dbac5a054312c6.jpeg')" class="w-full bg-green-primary hover:bg-green-600 text-white font-bold py-4 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center">
+                    <button onclick="addToCart('Ar-Condicionado Split Inverter II 9000 BTUs Elgin Eco', 2199.00, 'https://a-static.mlcdn.com.br/1500x1500/ar-condicionado-split-inverter-ii-9000-btus-elgin-eco-com-wi-fi-integrado-high-wall-so-frio-45hjfi09c2wb-45hjfe09c2cb-220v/frigelar2/kit9760/9ebb6c755d778e6968dbac5a054312c6.jpeg')" class="w-full bg-green-primary hover:bg-green-600 text-white font-bold py-4 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center add-to-cart-btn">
                         <i class="fas fa-shopping-cart mr-2"></i>
                         <span class="text-lg">COMPRAR AGORA</span>
                     </button>
@@ -1289,7 +1289,7 @@
     </script>
     <!-- Botão fixo de compra -->
     <div id="fixed-buy-button" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-4 md:hidden z-50">
-        <button onclick="addToCart('Ar-Condicionado Split Inverter II 9000 BTUs Elgin Eco', 2199.00, 'https://a-static.mlcdn.com.br/1500x1500/ar-condicionado-split-inverter-ii-9000-btus-elgin-eco-com-wi-fi-integrado-high-wall-so-frio-45hjfi09c2wb-45hjfe09c2cb-220v/frigelar2/kit9760/9ebb6c755d778e6968dbac5a054312c6.jpeg')" id="thebutton" class="w-full buy-button text-white py-3 rounded-lg text-sm font-medium hover:bg-opacity-90 transition flex items-center justify-center">
+        <button onclick="addToCart('Ar-Condicionado Split Inverter II 9000 BTUs Elgin Eco', 2199.00, 'https://a-static.mlcdn.com.br/1500x1500/ar-condicionado-split-inverter-ii-9000-btus-elgin-eco-com-wi-fi-integrado-high-wall-so-frio-45hjfi09c2wb-45hjfe09c2cb-220v/frigelar2/kit9760/9ebb6c755d778e6968dbac5a054312c6.jpeg')" id="thebutton" class="w-full buy-button text-white py-3 rounded-lg text-sm font-medium hover:bg-opacity-90 transition flex items-center justify-center add-to-cart-btn">
             <i class="fas fa-shopping-cart mr-2"></i>
             Comprar agora
         </button>
