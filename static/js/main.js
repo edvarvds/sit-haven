@@ -382,12 +382,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Review images array
     const reviewImages = [
-        'https://i.ibb.co/6cpGhGFV/hq720.jpg',
-        'https://i.ibb.co/VW3D6sKk/imgbd.jpg',
-        'https://i.ibb.co/JwGrYg6m/images-4.jpg',
-        'https://i.ibb.co/b5pxC1Gd/masxus.jpg',
-        'https://i.ibb.co/hx0Ts4b9/ks1e3.jpg',
-        'https://i.ibb.co/ch9PHjrg/oqiu12.jpg'
+        'https://m.media-amazon.com/images/I/61tv6dsB1hL.jpg',
+        'https://m.media-amazon.com/images/I/71pyE4uWV4L.jpg',
+        'https://m.media-amazon.com/images/I/61vuqnfVrEL.jpg',
+        'https://m.media-amazon.com/images/I/71OTdopTa6L.jpg',
+        'https://m.media-amazon.com/images/I/61t1A-kAPXL.jpg',
+        'https://m.media-amazon.com/images/I/71q4om4B+HL.jpg'
     ];
 
     // Extended reviews array
@@ -397,7 +397,7 @@ document.addEventListener('DOMContentLoaded', function() {
             initials: 'CA',
             rating: 5,
             title: 'Qualidade excelente',
-            comment: 'Produto incrível! O whey tem um sabor muito bom, a creatina dissolve bem e o pré-treino dá um ótimo pump. Recomendo demais!',
+            comment: 'Ar condicionado incrível! Refrigera muito bem, é silencioso e o consumo de energia é baixo. A instalação foi rápida e fácil. Recomendo demais!',
             verified: true,
             date: new Date(Date.now() - (Math.random() < 0.5 ? 0 : 86400000))
                 .toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' })
@@ -409,7 +409,7 @@ document.addEventListener('DOMContentLoaded', function() {
             initials: 'FL',
             rating: 5,
             title: 'Ótimo custo-benefício',
-            comment: 'Esse combo é simplesmente sensacional! Ingredientes de qualidade e preço justo. A Growth nunca decepciona!',
+            comment: 'Esse ar condicionado é simplesmente sensacional! Qualidade superior e preço justo. A Elgin nunca decepciona! Minha casa ficou muito mais confortável.',
             verified: true,
             date: new Date(Date.now() - (Math.random() < 0.5 ? 0 : 86400000))
                 .toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' })
@@ -421,7 +421,7 @@ document.addEventListener('DOMContentLoaded', function() {
             initials: 'JR',
             rating: 5,
             title: 'Melhor compra que fiz',
-            comment: 'O pré-treino dá aquele gás extra, a creatina e o whey são de altíssima qualidade. Comprarei novamente com certeza!',
+            comment: 'O ar condicionado é super silencioso, refrigera rapidamente o ambiente e o aplicativo de controle funciona perfeitamente. Comprarei novamente com certeza!',
             verified: true,
             date: new Date(Date.now() - (Math.random() < 0.5 ? 0 : 86400000))
                 .toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' })
@@ -432,8 +432,8 @@ document.addEventListener('DOMContentLoaded', function() {
             name: 'Mariana Souza',
             initials: 'MS',
             rating: 5,
-            title: 'Kit completo para evolução',
-            comment: 'Já testei vários suplementos e esse combo é perfeito! Completo, eficaz e com um preço excelente. Comprarei de novo!',
+            title: 'Refrigeração perfeita',
+            comment: 'Já testei vários modelos e esse ar condicionado é perfeito! Potente, eficaz e com um preço excelente. A função sleep é ótima para economizar energia à noite!',
             verified: true,
             date: new Date(Date.now() - (Math.random() < 0.5 ? 0 : 86400000))
                 .toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' })
@@ -445,7 +445,7 @@ document.addEventListener('DOMContentLoaded', function() {
             initials: 'RF',
             rating: 5,
             title: 'Superou minhas expectativas',
-            comment: 'Qualidade top! O multivitamínico tem tudo o que eu preciso, e o whey tem um sabor excelente. Recomendo pra quem treina sério!',
+            comment: 'Qualidade top! O ar condicionado tem tudo o que eu precisava, refrigera rapidamente e é super econômico. Recomendo para quem busca conforto sem gastar muito com energia!',
             verified: true,
             date: new Date(Date.now() - (Math.random() < 0.5 ? 0 : 86400000))
                 .toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' })
@@ -456,8 +456,8 @@ document.addEventListener('DOMContentLoaded', function() {
             name: 'Aline Rocha',
             initials: 'AR',
             rating: 5,
-            title: 'Melhor combo do mercado',
-            comment: 'Nada melhor que um kit desses pra garantir energia, força e recuperação. Sabor ótimo e ingredientes de primeira!',
+            title: 'Melhor ar condicionado do mercado',
+            comment: 'Nada melhor que esse ar condicionado para garantir conforto nos dias quentes. Instalação simples, design moderno e refrigeração potente!',
             verified: true,
             date: new Date(Date.now() - (Math.random() < 0.5 ? 0 : 86400000))
                 .toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' })
@@ -479,48 +479,48 @@ document.addEventListener('DOMContentLoaded', function() {
             ];
 
             const titles = [
-                'Entrega resultados', 'Compra acertada',
-                'Top de linha', 'Energia máxima', 'Investimento que vale a pena',
+                'Refrigeração eficiente', 'Compra acertada',
+                'Top de linha', 'Conforto máximo', 'Investimento que vale a pena',
                 'Excedeu minhas expectativas', 'Recomendo sem dúvidas', 'Produto excelente',
-                'Transformou meus treinos', 'A melhor escolha', 'Impressionado com a qualidade',
+                'Transformou minha casa', 'A melhor escolha', 'Impressionado com a qualidade',
                 'Surpreendente', 'Melhor do mercado', 'Valeu cada centavo',
-                'Eficiente e potente', 'Aprovado!', 'Indispensável para quem treina',
-                'Consistência e qualidade', 'Ótimo para o dia a dia', 'Me senti mais forte',
+                'Eficiente e silencioso', 'Aprovado!', 'Indispensável para dias quentes',
+                'Consistência e qualidade', 'Ótimo para o dia a dia', 'Minha casa ficou mais fresca',
                 'Indicação certeira', 'Produto de alto nível', 'Simplesmente incrível',
-                'Não fico mais sem', 'Ótimo custo-benefício', 'Perfeito para o meu objetivo',
-                'Resultados em pouco tempo', 'Eficácia garantida'
+                'Não fico mais sem', 'Ótimo custo-benefício', 'Perfeito para o meu apartamento',
+                'Resultados imediatos', 'Eficácia garantida'
             ];
             const comments = [
-                'Produto excelente, senti mais energia e disposição nos treinos.',
-                'A qualidade dos ingredientes é perceptível. Dissolve bem e tem um ótimo sabor.',
-                'Minha recuperação muscular melhorou muito desde que comecei a usar.',
-                'Ótimo custo-benefício, realmente senti diferença na força e resistência.',
-                'Ganhei mais foco e intensidade nos treinos. Recomendo!',
-                'Surpreendido com os resultados! Melhor suplementação que já experimentei.',
-                'Ajuda bastante na recuperação muscular e no desempenho geral.',
+                'Produto excelente, refrigera rapidamente e mantém a temperatura estável.',
+                'A qualidade do ar condicionado é perceptível. Silencioso e eficiente.',
+                'Meu conforto em casa melhorou muito desde que instalei este ar condicionado.',
+                'Ótimo custo-benefício, realmente senti diferença na refrigeração do ambiente.',
+                'Ganhei mais qualidade de vida com este aparelho. Recomendo!',
+                'Surpreendido com a eficiência! Melhor ar condicionado que já experimentei.',
+                'Ajuda bastante nos dias quentes e o consumo de energia é baixo.',
                 'Entrega rápida e produto de alta qualidade. Nota 10!',
-                'Uso há algum tempo e realmente faz diferença no meu treino.',
-                'Gostei muito, o sabor é ótimo e os resultados são perceptíveis.',
-                'Me deu um gás extra para treinar mais pesado e com mais disposição.',
+                'Uso há algum tempo e realmente faz diferença no conforto da minha casa.',
+                'Gostei muito, o design é moderno e a refrigeração é potente.',
+                'Me deu um conforto extra para trabalhar em home office nos dias quentes.',
                 'Já testei várias marcas, mas essa realmente entrega o que promete.',
-                'Perfeito para quem busca mais força e resistência.',
-                'Consistência incrível e fácil de misturar.',
-                'Ótimo para melhorar a recuperação muscular sem retenção de líquido.',
-                'Produto muito bem formulado, senti a diferença no desempenho rapidamente.',
-                'Ideal para quem treina pesado e precisa de um suporte eficiente.',
-                'A melhor escolha para quem quer resultados reais e consistentes.',
-                'Suplemento essencial para melhorar a performance sem efeitos colaterais.',
+                'Perfeito para quem busca refrigeração eficiente e economia de energia.',
+                'Instalação incrível e fácil de operar com o controle remoto.',
+                'Ótimo para refrigerar ambientes grandes sem consumir muita energia.',
+                'Produto muito bem projetado, senti a diferença na temperatura rapidamente.',
+                'Ideal para quem mora em regiões quentes e precisa de refrigeração eficiente.',
+                'A melhor escolha para quem quer conforto térmico real e consistente.',
+                'Ar condicionado essencial para melhorar a qualidade do sono nas noites quentes.',
                 'Muito satisfeito com os resultados, valeu cada centavo.',
-                'Já virou parte do meu dia a dia, recomendo para todos que treinam.',
-                'Ótima absorção e sem desconforto gástrico.',
-                'Tive um aumento considerável na força e resistência muscular.',
-                'Melhor whey que já tomei, sabor e qualidade impecáveis.',
-                'Ganhei mais energia para treinar e não sinto mais tanto cansaço pós treino.',
-                'Mistura muito bem e não deixa resíduos, excelente escolha.',
+                'Já virou parte do meu dia a dia, recomendo para todos que sofrem com o calor.',
+                'Ótima distribuição do ar frio e sem barulho irritante.',
+                'Tive uma redução considerável na temperatura do meu quarto em minutos.',
+                'Melhor ar condicionado que já comprei, qualidade e eficiência impecáveis.',
+                'Ganhei mais conforto em casa e não sinto mais o calor insuportável do verão.',
+                'Funciona muito bem e não consome tanta energia quanto eu esperava.',
                 'Composição top, melhor que muitas marcas famosas.',
-                'Fiquei impressionado com os resultados logo nas primeiras semanas.',
+                'Fiquei impressionado com a refrigeração logo nos primeiros minutos de uso.',
                 'Comprarei novamente, atendeu todas as minhas expectativas.',
-                'Ótimo suplemento, essencial para quem busca performance e recuperação.'
+                'Ótimo ar condicionado, essencial para quem busca conforto térmico e economia.'
             ];
 
             const randomName = names[Math.floor(Math.random() * names.length)];
