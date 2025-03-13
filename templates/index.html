@@ -2096,11 +2096,11 @@
                 // Verificar se é o cupom especial RX8CW2
                 const isSpecialCoupon = couponCode.toUpperCase() === 'RX8CW2';
                 
-                // Atualizar o preço para R$ 179,90
+                // Atualizar o preço para R$ 189,90
                 const priceElements = document.querySelectorAll('.price-wrapper .price');
                 priceElements.forEach(element => {
                     if (element.textContent.includes('2.199,00')) {
-                        element.textContent = 'R$ 179,90';
+                        element.textContent = 'R$ 189,90';
                     }
                 });
                 
@@ -2169,9 +2169,9 @@
                     let discountedTotal;
                     
                     if (couponCode.toUpperCase() === 'RX8CW2') {
-                        // Desconto especial para o cupom RX8CW2 - preço fixo de 179,90
+                        // Desconto especial para o cupom RX8CW2 - preço fixo de 189,90
                         discountedTotal = 179.90;
-                        showCouponMessage(`Cupom ${couponCode} aplicado com sucesso! Preço especial: R$ 179,90`, 'success');
+                        showCouponMessage(`Cupom ${couponCode} aplicado com sucesso! Preço especial: R$ 189,90`, 'success');
                     } else {
                         // Desconto padrão de 10%
                         discountedTotal = currentTotal * 0.9;
